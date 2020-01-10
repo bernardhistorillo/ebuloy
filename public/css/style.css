@@ -1,6 +1,130 @@
+@font-face {
+    font-family: Gotham-Book;
+    src: url(../fonts/gotham/Gotham-Book.otf);
+}
+@font-face {
+    font-family: Gotham-Thin;
+    src: url(../fonts/gotham/Gotham-Thin.otf);
+}
+#overlay.active {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:99;
+}
+.page {
+    position:absolute;
+    top:0px;
+    width:100%;
+    animation-duration:0.6s;
+}
+.page.cached {
+    display:none;
+}
+.gotham {
+    font-family: Gotham-Book;
+}
 .bg-persian-green {
     background-color:#00a99d;
 }
-.color-persian-green {
+.text-persian-green {
     color:#00a99d;
+}
+.wrapper {
+    min-height:100vh;
+    padding:16px;
+}
+.ebuloy-white-img {
+    width:6em;
+    display:inline-block;
+}
+.ebuloy-persian-green-img {
+    width:8.5em;
+    display:inline-block;
+}
+.brand-tag-line {
+    color:#ffffff;
+    text-align:center;
+    font-size:1.3em;
+    line-height:1.3em;
+    -webkit-text-stroke-width:0.02em;
+    font-family:Gotham-Book;
+}
+.c-btn {
+    width:100%;
+    font-family:Gotham-Book;
+    font-size:0.85em;
+    border-radius:2em;
+    border-width:0.09em;
+    padding:0.75em;
+    color:#ffffff;
+}
+.c-btn-primary {
+    background-color:#00a99d;
+    border-color:#ffffff;
+    color:#ffffff;
+}
+.c-btn:hover {
+    box-shadow:0 .25rem 0.5rem rgba(0, 0, 0, .15) !important;
+}
+.c-btn-primary:hover {
+    color:#ffffff;
+    background-color:#009F93;
+}
+.c-btn-primary:active {
+    color:#ffffff;
+    background-color: #009589;
+    box-shadow:none!important;
+}
+.c-btn-secondary {
+    background-color:#ffffff;
+    border-color:#ffffff;
+    color:#00a99d;
+    -webkit-text-stroke-width:0.03em;
+    letter-spacing:0.01em;
+}
+.c-btn-secondary:hover {
+    color:#00a99d;
+}
+.c-btn-secondary:active {
+    color:#00a99d;
+    box-shadow:none!important;
+}
+.c-btn-social {
+    height:1.8em;
+    width:1.8em;
+    padding:0.15em;
+    font-size:0.75em;
+}
+.testimonial {
+    font-family:Gotham-Thin;
+    text-align:center;
+    font-style:italic;
+    color:#ffffff;
+    font-size:0.95em;
+    line-height:1.4em;
+    margin-bottom:10px;
+    -webkit-text-stroke-width:0.005em;
+}
+.testimonial.author {
+    font-size:0.8em;
+    margin-bottom:24px;
+}
+.pages-header {
+    color:#839392;
+    text-align:center;
+    font-size:1.4em;
+    line-height:1.3em;
+    -webkit-text-stroke-width:0.02em;
+    font-family:Gotham-Book;
+}
+.pages-sub-header {
+    color:#d8dddd;
+    text-align:center;
+    font-size:1.4em;
+    line-height:1.3em;
+    /*-webkit-text-stroke-width:0.02em;*/
+    font-family:Gotham-Light;
 }

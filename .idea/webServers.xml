@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ef08d945-ea66-4e2f-bbfe-2a707a139f19" name="ebuloy.amacph.com" url="http://ftp.amacph.com">
+        <fileTransfer host="ftp.amacph.com" port="21" rootFolder="/ebuloy.amacph.com">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" showHiddenFiles="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
