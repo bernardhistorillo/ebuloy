@@ -1,6 +1,6 @@
 @php
-    $version = date("Ymdhis");
-    //$version = 0;
+    //$version = date("Ymdhis");
+    $version = 4;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
     <link rel="stylesheet" href="{{ url("css/style.css?v=" . $version) }}" />
+    <link rel="icon" href="{{ url("img/icon.png") }}" type="image/x-icon" />
 </head>
 
 <body>

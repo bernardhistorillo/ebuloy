@@ -18,7 +18,7 @@
     position:absolute;
     top:0px;
     width:100%;
-    animation-duration:0.6s;
+    animation-duration:0.45s;
 }
 .page.cached {
     display:none;
@@ -60,14 +60,15 @@
     border-width:0.09em;
     padding:0.75em;
     color:#ffffff;
+    position:relative;
+}
+.c-btn:hover {
+    box-shadow:0 .25rem 0.5rem rgba(0, 0, 0, .15) !important;
 }
 .c-btn-primary {
     background-color:#00a99d;
     border-color:#ffffff;
     color:#ffffff;
-}
-.c-btn:hover {
-    box-shadow:0 .25rem 0.5rem rgba(0, 0, 0, .15) !important;
 }
 .c-btn-primary:hover {
     color:#ffffff;
@@ -92,11 +93,52 @@
     color:#00a99d;
     box-shadow:none!important;
 }
+.c-btn-tertiary {
+    background-color:#ffffff;
+    border-color:#00a99d;
+    color:#839392;
+    -webkit-text-stroke-width:0.03em;
+    letter-spacing:0.01em;
+}
+.c-btn-tertiary:hover {
+    color:#00a99d;
+}
+.c-btn-tertiary:active {
+    color:#00a99d;
+    box-shadow:none!important;
+}
+.c-btn-quaternary {
+    background-color:#00a99d;
+    border-color:#00a99d;
+    color:#ffffff;
+}
+.c-btn-quaternary:hover {
+    color:#ffffff;
+    background-color:#009F93;
+}
+.c-btn-quaternary:active {
+    color:#ffffff;
+    background-color: #009589;
+    box-shadow:none!important;
+}
 .c-btn-social {
     height:1.8em;
     width:1.8em;
     padding:0.15em;
     font-size:0.75em;
+}
+.c-btn i.fa-chevron-right {
+    position:absolute;
+    top:0.75em;
+    right:1em;
+    font-size:1.2em;
+    color:#00a99d;
+}
+.testimonial-container {
+    width:100%;
+    position:absolute;
+    top:0;
+    animation-duration:0.6s;
 }
 .testimonial {
     font-family:Gotham-Thin;
@@ -121,10 +163,29 @@
     font-family:Gotham-Book;
 }
 .pages-sub-header {
-    color:#d8dddd;
+    color:#839392;
     text-align:center;
-    font-size:1.4em;
+    font-size:0.9em;
     line-height:1.3em;
-    /*-webkit-text-stroke-width:0.02em;*/
-    font-family:Gotham-Light;
+    -webkit-text-stroke-width:0.01em;
+    font-family:Gotham-Thin
+}
+.pages-img {
+    width:100%;
+}
+.page-number {
+    display:inline-block;
+    height:2em;
+    width:2em;
+    padding:0.25em;
+    font-size:0.7em;
+    font-family:Gotham-Book;
+    -webkit-text-stroke-width:0.02em;
+    background-color:#d4dddc;
+    color:#839392;
+    border-radius:50%;
+}
+.page-number.active {
+    background-color:#839392;
+    color:#ffffff;
 }
