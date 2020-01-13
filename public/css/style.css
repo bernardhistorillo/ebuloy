@@ -6,6 +6,9 @@
     font-family: Gotham-Thin;
     src: url(../fonts/gotham/Gotham-Thin.otf);
 }
+body {
+    overflow-x:hidden;
+}
 #overlay.active {
     position:fixed;
     top:0;
@@ -133,12 +136,6 @@
     right:1em;
     font-size:1.2em;
     color:#00a99d;
-}
-.testimonial-container {
-    width:100%;
-    position:absolute;
-    top:0;
-    animation-duration:0.6s;
 }
 .testimonial {
     font-family:Gotham-Thin;

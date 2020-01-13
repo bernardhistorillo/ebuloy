@@ -29,18 +29,20 @@
                     <a href="https://twitter.com" target="_blank" class="btn c-btn c-btn-secondary c-btn-social"><i class="fab fa-twitter"></i></a>
                 </div>
 
-                <div class="position-relative pt-2">
-                    <div class="testimonial-container d-none">
-                        <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                        <p class="testimonial author">- anonymous 1</p>
-                    </div>
-                    <div class="testimonial-container d-none">
-                        <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                        <p class="testimonial author">- anonymous 2</p>
-                    </div>
-                    <div class="testimonial-container d-none">
-                        <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                        <p class="testimonial author">- anonymous 3</p>
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <p class="testimonial">"Thanks ebuloy for making it possible."</p>
+                            <p class="testimonial author">- anonymous 1</p>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="testimonial">"Thanks ebuloy for making it possible."</p>
+                            <p class="testimonial author">- anonymous 2</p>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="testimonial">"Thanks ebuloy for making it possible."</p>
+                            <p class="testimonial author">- anonymous 3</p>
+                        </div>
                     </div>
                 </div>
             </div>

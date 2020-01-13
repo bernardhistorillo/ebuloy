@@ -1,6 +1,6 @@
 @php
     //$version = date("Ymdhis");
-    $version = 4;
+    $version = 5;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
