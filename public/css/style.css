@@ -17,6 +17,26 @@ body {
     height:100%;
     z-index:99;
 }
+#loading.active {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:99;
+    background-color:rgba(0,0,0,0.3);
+}
+#loading i {
+    display:none;
+}
+#loading.active i {
+    position:absolute;
+    top:calc(50% - 24px);
+    left:calc(50% - 24px);
+    transform:translate(-50%,-50%);
+    color:#4d5958;
+    display:block;
+}
 .page {
     position:absolute;
     top:0px;
@@ -27,7 +47,7 @@ body {
     display:none;
 }
 .gotham {
-    font-family: Gotham-Book;
+    font-family: Gotham-Book, serif;
 }
 .bg-persian-green {
     background-color:#00a99d;
@@ -53,75 +73,122 @@ body {
     font-size:1.3em;
     line-height:1.3em;
     -webkit-text-stroke-width:0.02em;
-    font-family:Gotham-Book;
+    font-family:Gotham-Book, serif;
 }
 .c-btn {
     width:100%;
-    font-family:Gotham-Book;
+    font-family:Gotham-Book, serif;
     font-size:0.85em;
     border-radius:2em;
     border-width:0.09em;
     padding:0.75em;
     color:#ffffff;
     position:relative;
+    -webkit-text-stroke-width:0.02em;
+    letter-spacing:0.01em;
 }
 .c-btn:hover {
     box-shadow:0 .25rem 0.5rem rgba(0, 0, 0, .15) !important;
 }
-.c-btn-primary {
+.c-btn-1 {
     background-color:#00a99d;
     border-color:#ffffff;
     color:#ffffff;
 }
-.c-btn-primary:hover {
+.c-btn-1:hover {
     color:#ffffff;
     background-color:#009F93;
 }
-.c-btn-primary:active {
+.c-btn-1:active {
     color:#ffffff;
     background-color: #009589;
     box-shadow:none!important;
 }
-.c-btn-secondary {
+.c-btn-2 {
     background-color:#ffffff;
     border-color:#ffffff;
     color:#00a99d;
     -webkit-text-stroke-width:0.03em;
     letter-spacing:0.01em;
 }
-.c-btn-secondary:hover {
+.c-btn-2:hover {
     color:#00a99d;
 }
-.c-btn-secondary:active {
+.c-btn-2:active {
     color:#00a99d;
     box-shadow:none!important;
 }
-.c-btn-tertiary {
+.c-btn-3 {
     background-color:#ffffff;
     border-color:#00a99d;
     color:#839392;
     -webkit-text-stroke-width:0.03em;
     letter-spacing:0.01em;
 }
-.c-btn-tertiary:hover {
+.c-btn-3:hover {
     color:#00a99d;
 }
-.c-btn-tertiary:active {
+.c-btn-3:active {
     color:#00a99d;
     box-shadow:none!important;
 }
-.c-btn-quaternary {
+.c-btn-4 {
     background-color:#00a99d;
     border-color:#00a99d;
     color:#ffffff;
 }
-.c-btn-quaternary:hover {
+.c-btn-4:hover {
     color:#ffffff;
     background-color:#009F93;
 }
-.c-btn-quaternary:active {
+.c-btn-4:active {
     color:#ffffff;
     background-color: #009589;
+    box-shadow:none!important;
+}
+.c-btn-5 {
+    background-color:#36a1dd;
+    border-color:#36a1dd;
+    color:#ffffff;
+}
+.c-btn-5:hover {
+    color:#ffffff;
+    background-color: #3797d3;
+}
+.c-btn-5:active {
+    color:#ffffff;
+    background-color: #3390c9;
+    box-shadow:none!important;
+}
+.c-btn-6 {
+    background-color:#e56557;
+    border-color:#e56557;
+    color:#ffffff;
+}
+.c-btn-6:hover {
+    color:#ffffff;
+    background-color: #db6154;
+}
+.c-btn-6:active {
+    color:#ffffff;
+    background-color: #d16254;
+    box-shadow:none!important;
+}
+.c-btn-7 {
+    background-color:#ffffff;
+    border-color:#00a99d;
+    color:#839392;
+    -webkit-text-stroke-width:0.03em;
+    letter-spacing:0.01em;
+    display:inline-block;
+    width:initial;
+    padding:10px 30px;
+}
+.c-btn-7:hover {
+    color:#00a99d;
+}
+.c-btn-7:active {
+    color:#00a99d;
     box-shadow:none!important;
 }
 .c-btn-social {
@@ -138,7 +205,7 @@ body {
     color:#00a99d;
 }
 .testimonial {
-    font-family:Gotham-Thin;
+    font-family:Gotham-Thin, serif;
     text-align:center;
     font-style:italic;
     color:#ffffff;
@@ -156,8 +223,8 @@ body {
     text-align:center;
     font-size:1.4em;
     line-height:1.3em;
-    -webkit-text-stroke-width:0.02em;
-    font-family:Gotham-Book;
+    -webkit-text-stroke-width:0.04em;
+    font-family:Gotham-Book, serif;
 }
 .pages-sub-header {
     color:#839392;
@@ -165,7 +232,7 @@ body {
     font-size:0.9em;
     line-height:1.3em;
     -webkit-text-stroke-width:0.01em;
-    font-family:Gotham-Thin
+    font-family:Gotham-Thin, serif;
 }
 .pages-img {
     width:100%;
@@ -176,7 +243,7 @@ body {
     width:2em;
     padding:0.25em;
     font-size:0.7em;
-    font-family:Gotham-Book;
+    font-family:Gotham-Book, serif;
     -webkit-text-stroke-width:0.02em;
     background-color:#d4dddc;
     color:#839392;
@@ -185,4 +252,42 @@ body {
 .page-number.active {
     background-color:#839392;
     color:#ffffff;
+}
+.form-group {
+    position:relative;
+}
+.form-group p {
+    color:#839392;
+    font-family:Gotham-Book, serif;
+    font-size:0.6em;
+    position:absolute;
+    top:7px;
+    left:16px;
+}
+.form-group .form-control {
+    border:0.07em solid #4d5958;
+    border-radius:7px;
+    font-family:Gotham-Book, serif;
+    padding:30px 16px 13px 16px;
+    margin-top:2px;
+    font-size:0.75em;
+    color:#526160;
+}
+.form-group .form-control::placeholder {
+    color:#d4dddc;
+}
+.form-group .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #4d5958;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(77,89,88,.25);
+}
+.modal-title {
+    font-family: Gotham-Book, serif;
+    color:#839392;
+}
+.modal-body {
+    font-family: Gotham-Book, serif;
+    color:#839392;
 }

@@ -11,7 +11,9 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
+        "spatie/laravel-medialibrary": "^7.0.0",
         "symfony/translation": "4.3.8"
     },
     "require-dev": {
