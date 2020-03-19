@@ -11,7 +11,7 @@ Home
         <div class="bg-persian-green wrapper">
             <div class="container">
                 <div class="text-center pt-4">
-                    <img class="ebuloy-white-img" src="{{ url("img/ebuloy-white.png") }}" />
+                    <img class="ebuloy-white-img-2" src="{{ url("img/ebuloy-white-2.png") }}" />
                 </div>
 
                 <div class="my-3 py-3">

@@ -66,6 +66,8 @@ class SignupController extends Controller
             $user["first_name"] = $facebook_user->user['first_name'];
             $user["last_name"] = $facebook_user->user['last_name'];
             
+            return $user;
+            
             if($facebook_user->getEmail()) {
                 $email_exist = User::where([ ["email", "=", $facebook_user->getEmail()] ])->first();
                 if(!$email_exist) {

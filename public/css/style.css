@@ -59,7 +59,7 @@ body {
     min-height:100vh;
     padding:16px;
 }
-.ebuloy-white-img {
+.ebuloy-white-img-2 {
     width:6em;
     display:inline-block;
 }
@@ -290,4 +290,52 @@ body {
 .modal-body {
     font-family: Gotham-Book, serif;
     color:#839392;
+}
+.dashboard-card {
+    border-radius:14px;
+}
+.dashboard-card .card-header {
+    border-radius:14px 14px 0px 0px;
+    padding-top:16px;
+    background-color:#ffffff;
+    border-bottom:0;
+}
+.dashboard-card .nav-item {
+    padding:0px 8px;
+}
+.dashboard-card .nav-link {
+    font-family: Gotham-Book, serif;
+    color:#d4dddc;
+    text-align:center;
+    padding:0px;
+    font-size:0.68em;
+}
+.dashboard-card .nav-link img {
+    width:29px;
+    margin-bottom:4px;
+}
+.dashboard-card .nav-link:not(.active) img.active {
+    display:none;
+}
+.dashboard-card .nav-link:not(.active) img.inactive {
+    display:inline-block;
+}
+.dashboard-card .nav-link.active img.active {
+    display:inline-block;
+}
+.dashboard-card .nav-link.active img.inactive {
+    display:none;
+}
+.dashboard-card .nav-link.active {
+    background-color:#ffffff;
+    color:#00a99d;
+}
+.dashboard-card .card-body {
+    background-color:#eff4f3;
+}
+.dashboard-card .card-footer {
+    background-color:#ffffff;
+    border-radius:0px 0px 14px 14px;
+    height:70px;
+    border-top:0;
 }

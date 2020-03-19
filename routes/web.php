@@ -10,3 +10,5 @@ Route::get('auth/facebook', 'SignupController@redirectToFacebook')->name('auth.f
 Route::get('auth/facebook/callback', 'SignupController@handleFacebookCallback');
 Route::get('auth/google', 'SignupController@redirectToGoogle')->name('auth.google');
 Route::get('auth/google/callback', 'SignupController@handleGoogleCallback');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
