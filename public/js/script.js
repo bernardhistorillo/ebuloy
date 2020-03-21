@@ -1,3 +1,5 @@
+var uploader = $('<input type="file" accept="image/*" />');
+
 var animateCSS = function(element, animationName, callback) {
     const node = document.querySelector(element)
     node.classList.add('animated', animationName)
@@ -100,6 +102,21 @@ $(document).ready(function() {
     history.pushState("", document.title, window.location.pathname);
 });
 
+uploader.on("change", function() {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+
+        img.onload = function() {
+            $("#upload-photo").css("background-image", "url('" + img.src + "')");
+            $("#upload-photo").addClass("active");
+        };
+
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(uploader[0].files[0])
+});
+
 $(window).bind("hashchange", function(e) {
     var get_hash = function(link) {
         var hash = link.split("#");
@@ -179,4 +196,13 @@ $(document).on("submit", "#signup-form", function(e) {
     }).fail(function(e) {
         fail(e.responseText);
     }).always(always);
+});
+
+$(document).on("click", '#upload-photo', function(e) {
+    e.preventDefault();
+
+    $("#upload-photo").removeClass("active");
+    $("#upload-photo").css("background-image", "initial");
+
+    uploader.click();
 });

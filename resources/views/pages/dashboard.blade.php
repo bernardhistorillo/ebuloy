@@ -48,7 +48,49 @@ Home
             <div class="card-body">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-campaign" role="tabpanel" aria-labelledby="nav-campaign-tab">
-                        <p class="my-5 py-5 text-center">Campaign</p>
+                        <div class="deceased-item">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="width-50"><img src="{{ url('img/deceased.png') }}" class="w-100" /></td>
+                                    <td class="pl-3">
+                                        <p class="name mb-0">Name of deceased</p>
+                                        <div class="row no-gutters">
+                                            <div class="col-4">
+                                                <span class="label">End:</span> <span class="value">24 Nov</span>
+                                            </div>
+                                            <div class="col-8">
+                                                <span class="label">Donations:</span> <span class="value">55</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="status active">ACTIVE</div>
+                        </div>
+
+                        <div class="deceased-item">
+                            <table class="w-100">
+                                <tr>
+                                    <td class="width-50"><img src="{{ url('img/deceased.png') }}" class="w-100" /></td>
+                                    <td class="pl-3">
+                                        <p class="name mb-0">Name of deceased</p>
+                                        <div class="row no-gutters">
+                                            <div class="col-4">
+                                                <span class="label disabled">End:</span> <span class="value disabled">24 Nov</span>
+                                            </div>
+                                            <div class="col-8">
+                                                <span class="label disabled">Donations:</span> <span class="value disabled">55</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="status">DRAFT</div>
+                        </div>
+
+                        <a href="{{ route('create-campaign') }}" id="add-campaign-button">
+                            <i class="fas fa-plus"></i>
+                        </a>
                     </div>
                     <div class="tab-pane fade" id="nav-donations" role="tabpanel" aria-labelledby="nav-donations-tab">
                         <p class="my-5 py-5 text-center">Donations</p>
