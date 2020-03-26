@@ -15,10 +15,24 @@ class SignupController extends Controller
     }
     
     public function form() {
+        if(Auth::check()) {
+            if(!Auth::user()->first_name || !Auth::user()->last_name || !Auth::user()->mobile_number || !Auth::user()->email_address) {
+                return view("pages.signup-form");
+            } else {
+                return redirect()->route('dashboard');
+            }
+        }
+        
         return view("pages.signup-form");
     }
     
     public function submit_form(Request $request) {
+        if(Auth::check()) {
+            if(Auth::user()->first_name && Auth::user()->last_name && Auth::user()->mobile_number && Auth::user()->email_address) {
+                return redirect()->route('dashboard');
+            }
+        }
+        
         $response["error"] = "";
         
         $request->validate([
@@ -28,7 +42,11 @@ class SignupController extends Controller
             'mobile_number' => 'required|digits:11'
         ]);
         
-        if($request->id == null) {
+        $user_id = null;
+        
+        if(Auth::check()) {
+            $user_id = Auth::user()->id;
+        } else {
             $request->validate([
                 'password' => 'required|alpha_num|min:6|max:191',
                 'confirm_password' => 'required|same:password|max:191'
@@ -40,8 +58,11 @@ class SignupController extends Controller
             ]);
         }
         
-        $user = User::updateOrCreate($request->except('confirm_password'));
-        Auth::loginUsingId($user->id);
+        $user = User::updateOrCreate(['id' => $user_id], $request->except('confirm_password'));
+    
+        if(!Auth::check()) {
+            Auth::loginUsingId($user->id);
+        }
         
         return $response;
     }
@@ -73,6 +94,6 @@ class SignupController extends Controller
     
         Auth::loginUsingId($user->id);
         
-        return route('dashboard');
+        return redirect()->route('dashboard');
     }
 }

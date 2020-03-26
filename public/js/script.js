@@ -1,5 +1,7 @@
 var uploader = $('<input type="file" accept="image/*" />');
 
+var cover_photo_uploader = $('<input type="file" accept="image/*" />');
+
 var animateCSS = function(element, animationName, callback) {
     const node = document.querySelector(element)
     node.classList.add('animated', animationName)
@@ -108,13 +110,28 @@ uploader.on("change", function() {
         var img = new Image();
 
         img.onload = function() {
-            $("#upload-photo").css("background-image", "url('" + img.src + "')");
+            $("#upload-photo, #deceased-photo").css("background-image", "url('" + img.src + "')");
             $("#upload-photo").addClass("active");
         };
 
         img.src = event.target.result;
     };
     reader.readAsDataURL(uploader[0].files[0])
+});
+
+cover_photo_uploader.on("change", function() {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+
+        img.onload = function() {
+            $("#upload-cover-photo, #cover-photo").css("background-image", "url('" + img.src + "')");
+            $("#upload-cover-photo").addClass("active");
+        };
+
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(cover_photo_uploader[0].files[0])
 });
 
 $(window).bind("hashchange", function(e) {
@@ -177,7 +194,13 @@ $(document).on("submit", "#signup-form", function(e) {
 
     $("#loading").addClass("active");
 
+    $("#signup-form input:disabled").addClass("disabled");
+    $("#signup-form input:disabled").prop("disabled", false);
+
     var formData = new FormData($("#signup-form")[0]);
+
+    $("#signup-form input.disabled").prop("disabled", true);
+    $("#signup-form input.disabled").removeClass("disabled");
 
     $.ajax({
         url: $("#route-signup-submit-form").html(),
@@ -189,7 +212,7 @@ $(document).on("submit", "#signup-form", function(e) {
         data: formData
     }).done(function(response) {
         if(response.error == "") {
-            window.location = $("#route-campaign").html();
+            window.location = $("#route-dashboard").html();
         } else {
             fail(response.error);
         }
@@ -198,11 +221,98 @@ $(document).on("submit", "#signup-form", function(e) {
     }).always(always);
 });
 
-$(document).on("click", '#upload-photo', function(e) {
-    e.preventDefault();
-
+$(document).on("click", '#upload-photo', function() {
     $("#upload-photo").removeClass("active");
-    $("#upload-photo").css("background-image", "initial");
+    $("#upload-photo, #deceased-photo").css("background-image", "initial");
+    uploader.val('');
 
     uploader.click();
+});
+
+$(document).on("click", '#upload-cover-photo', function() {
+    $("#upload-cover-photo").removeClass("active");
+    $("#upload-cover-photo, #cover-photo").css("background-image", "initial");
+    cover_photo_uploader.val('');
+
+    cover_photo_uploader.click();
+});
+
+$(document).on("click", ".deceased-item.draft", function() {
+    window.location = $(this).data("draft-link");
+});
+
+$(document).on("click", ".create-campaign", function() {
+    $("#loading").addClass("active");
+
+    let is_draft = $(this).data("is-draft");
+
+    var formData = new FormData($("#create-campaign-form")[0]);
+    formData.append('is_draft', is_draft);
+    formData.append('image', (uploader[0].files[0] == undefined) ? '' : uploader[0].files[0]);
+    formData.append('cover_photo', (cover_photo_uploader[0].files[0] == undefined) ? '' : cover_photo_uploader[0].files[0]);
+
+    $.ajax({
+        url: $("#route-create-campaign-submit").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            if(is_draft) {
+                window.location = response.route;
+            } else {
+                $("#create-campaign-form input, #create-campaign-form textarea").val('');
+
+                $("#upload-photo").removeClass("active");
+                $("#upload-photo, #deceased-photo").css("background-image", "initial");
+                uploader.val('');
+
+                $("#upload-cover-photo").removeClass("active");
+                $("#upload-cover-photo, #cover-photo").css("background-image", "initial");
+                cover_photo_uploader.val('');
+                
+                window.location = "#page-5";
+            }
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});
+
+$(document).on("click", "#preview-campaign", function() {
+    let first_name = (($("input[name='first_name']").val()) ? $("input[name='first_name']").val() : "Juan");
+    let last_name = (($("input[name='last_name']").val()) ? $("input[name='last_name']").val() : "Dela Cruz");
+
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    let born = "Nov 1, 1945";
+    if($("input[name='date_of_birth']").val()) {
+        let date = new Date($("input[name='date_of_birth']").val());
+        born = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    }
+
+    let died = "Nov 2, 2019";
+    if($("input[name='date_of_death']").val()) {
+        let date = new Date($("input[name='date_of_death']").val());
+        died = months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+    }
+
+    let funeral = ($("input[name='funeral']").val()) ? $("input[name='funeral']").val() : "St. Peters";
+    let street = ($("input[name='street']").val()) ? $("input[name='street']").val() : "123 Street";
+    let city = ($("input[name='city']").val()) ? $("input[name='city']").val() : "Legazpi City";
+    let province = ($("input[name='province']").val()) ? $("input[name='province']").val() : "Albay";
+    let postal_code = ($("input[name='postal_code']").val()) ? $("input[name='postal_code']").val() : "4500";
+    let story = ($("textarea[name='story']").val()) ? $("textarea[name='story']").val() : $("#story").data("dummy");;
+
+    $("#name").html(first_name + " " + last_name);
+    $("#born").html(born);
+    $("#died").html(died);
+    $("#funeral").html(funeral);
+    $("#address").html(street + ", " + city + ", " + province + ", " + postal_code);
+    $("#story").html(story);
 });

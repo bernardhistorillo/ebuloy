@@ -45,62 +45,125 @@ Home
                     </li>
                 </ul>
             </div>
-            <div class="card-body">
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-campaign" role="tabpanel" aria-labelledby="nav-campaign-tab">
-                        <div class="deceased-item">
-                            <table class="w-100">
-                                <tr>
-                                    <td class="width-50"><img src="{{ url('img/deceased.png') }}" class="w-100" /></td>
-                                    <td class="pl-3">
-                                        <p class="name mb-0">Name of deceased</p>
-                                        <div class="row no-gutters">
-                                            <div class="col-4">
-                                                <span class="label">End:</span> <span class="value">24 Nov</span>
-                                            </div>
-                                            <div class="col-8">
-                                                <span class="label">Donations:</span> <span class="value">55</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="status active">ACTIVE</div>
-                        </div>
 
-                        <div class="deceased-item">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-campaign" role="tabpanel" aria-labelledby="nav-campaign-tab">
+                    <div class="card-body">
+                        @foreach(Auth::user()->campaigns() as $campaign)
+                        <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }}" data-draft-link="{{ ($campaign['is_draft'] == 1) ? route('create-campaign', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) : '' }}">
                             <table class="w-100">
                                 <tr>
-                                    <td class="width-50"><img src="{{ url('img/deceased.png') }}" class="w-100" /></td>
+                                    <td class="width-40">
+                                        <div class="image" style="background-image:url('{{ ($campaign->hasMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')" class="w-100"></div>
+                                    </td>
                                     <td class="pl-3">
-                                        <p class="name mb-0">Name of deceased</p>
+                                        <p class="name mb-0">{{ ($campaign['first_name']) ? $campaign['first_name'] : '----------' }} {{ ($campaign['last_name']) ? $campaign['last_name'] : '----------' }}</p>
                                         <div class="row no-gutters">
                                             <div class="col-4">
-                                                <span class="label disabled">End:</span> <span class="value disabled">24 Nov</span>
+                                                <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">End:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['end_of_campaign']) ? \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('j M') : '-- ---' }}</span>
                                             </div>
                                             <div class="col-8">
-                                                <span class="label disabled">Donations:</span> <span class="value disabled">55</span>
+                                                <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">Donations:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['is_draft'] == 1) ? 0 : 0 }}</span>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
-                            <div class="status">DRAFT</div>
+                            <div class="status {{ ($campaign['is_draft'] == 0) ? 'active' : '' }}">{{ ($campaign['is_draft'] == 1) ? 'DRAFT' : 'ACTIVE' }}</div>
                         </div>
+                        @endforeach
 
                         <a href="{{ route('create-campaign') }}" id="add-campaign-button">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
-                    <div class="tab-pane fade" id="nav-donations" role="tabpanel" aria-labelledby="nav-donations-tab">
-                        <p class="my-5 py-5 text-center">Donations</p>
+                </div>
+
+                <div class="tab-pane fade" id="nav-donations" role="tabpanel" aria-labelledby="nav-donations-tab">
+                    <p class="my-5 py-5 text-center">Donations</p>
+                </div>
+
+                <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
+                    <div class="px-3 pt-2 pb-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="label mb-0">ACCOUNT INFORMATION</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="account-edit-text mb-0">EDIT</p>
+                            </div>
+                        </div>
+
+                        <table class="w-100 mt-3">
+                            <tr>
+                                <td class="width-85"><img src="{{ Auth::user()->getMedia('display_photos')->last()->getFullUrl() }}" class="w-100 account-display-photo" /></td>
+                                <td class="pl-3 account-details">
+                                    <p class="font-weight-bold">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
+                                    <p>{{ Auth::user()->mobile_number }}</p>
+                                    <p class="mb-0">{{ Auth::user()->email_address }}</p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
-                        <p class="my-5 py-5 text-center">Account</p>
+
+                    <div id="earned-donations-container" class="px-3 py-3">
+                        <p class="label mb-0">EARNED DONATIONS</p>
+                        <div class="row mt-3 px-2">
+                            <div class="col-4 px-2">
+                                <div class="earned-donations">
+                                    <div>
+                                        <p class="amount">2,000</p>
+                                        <p class="method">GCASH</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 px-2">
+                                <div class="earned-donations">
+                                    <div>
+                                        <p class="amount">5,000</p>
+                                        <p class="method">PAYPAL</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 px-2">
+                                <div class="earned-donations total">
+                                    <div>
+                                        <p class="amount">7,000</p>
+                                        <p class="method">TOTAL</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
-                        <p class="my-5 py-5 text-center">Settings</p>
+
+                    <div id="bank-account-information-container" class="px-3 py-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <p class="label mb-0">BANK ACCOUNT INFORMATION</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="account-edit-text mb-0">EDIT</p>
+                            </div>
+                        </div>
+
+                        <table class="mt-3 w-100">
+                            <tr>
+                                <td class="width-85">Bank Name</td>
+                                <td>BDO UNIBANK</td>
+                            </tr>
+                            <tr>
+                                <td>Account No.</td>
+                                <td>**** **** **** 1234</td>
+                            </tr><tr>
+                                <td>Account Name</td>
+                                <td>Ismael Jerusalem</td>
+                            </tr>
+                        </table>
                     </div>
+                </div>
+
+                <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                    <p class="my-5 py-5 text-center">Settings</p>
                 </div>
             </div>
             <div class="card-footer"></div>

@@ -64,7 +64,7 @@ body {
     width:6em;
     display:inline-block;
 }
-.ebuloy-persian-green-img {
+.ebuloy-persian-green-img, .ebuloy-white-img {
     width:8.5em;
     display:inline-block;
 }
@@ -192,11 +192,31 @@ body {
     color:#00a99d;
     box-shadow:none!important;
 }
+.c-btn-8 {
+    background-color:#839392;
+    border-color:#ffffff;
+    color:#ffffff;
+    -webkit-text-stroke-width:0.03em;
+    letter-spacing:0.01em;
+}
+.c-btn-8:hover {
+    color:#ffffff;
+}
+.c-btn-8:active {
+    color:#ffffff;
+    box-shadow:none!important;
+}
 .c-btn-social {
     height:1.8em;
     width:1.8em;
     padding:0.15em;
     font-size:0.75em;
+}
+.c-btn-social-2 {
+    height:2.4em;
+    width:2.4em;
+    padding:0.4em;
+    font-size:0.7em;
 }
 .c-btn i.fa-chevron-right {
     position:absolute;
@@ -204,6 +224,13 @@ body {
     right:1em;
     font-size:1.2em;
     color:#00a99d;
+}
+.c-btn i.fa-chevron-left {
+    position:absolute;
+    top:0.75em;
+    left:1em;
+    font-size:1.2em;
+    color:#ffffff;
 }
 .testimonial {
     font-family:Gotham-Thin, serif;
@@ -267,6 +294,8 @@ body {
     padding-top:7px;
     padding-bottom:2px;
     padding-right:10px;
+}
+.form-group.textarea p {
     background-color:#ffffff;
 }
 .form-group .form-control {
@@ -292,6 +321,16 @@ body {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(77,89,88,.25);
 }
+.form-group p.disabled {
+    background-color:#e9ecef;
+}
+.form-group .fas {
+    position:absolute;
+    right:12px;
+    top:14px;
+    color:#00a99d;
+    font-size:1.2em;
+}
 .modal-title {
     font-family: Gotham-Book, serif;
     color:#839392;
@@ -302,7 +341,6 @@ body {
 }
 .dashboard-card {
     border-radius:14px;
-    min-height: calc(100vh - 125px);
 }
 .dashboard-card .card-header {
     border-radius:14px 14px 0px 0px;
@@ -343,6 +381,7 @@ body {
 .dashboard-card .card-body {
     background-color:#eff4f3;
     padding:16px;
+    min-height: calc(100vh - 270px);
 }
 .dashboard-card .card-footer {
     background-color:#ffffff;
@@ -358,8 +397,25 @@ body {
     position:relative;
     margin-bottom:15px;
 }
-.width-50 {
+.deceased-item.draft {
+    cursor: pointer;
+}
+.deceased-item .image {
+    width:100%;
+    padding-top:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius:50%;
+}
+.width-40 {
     width:40px;
+}
+.width-70 {
+    width:70px;
+}
+.width-85 {
+    width:85px;
 }
 .deceased-item .name {
     font-family: Gotham-Book, serif;
@@ -410,8 +466,17 @@ body {
     color:#d5dddc;
     font-size:1.6em;
 }
+.font-size-200 {
+    font-size:1.9em;
+}
 .font-size-150 {
     font-size:1.5em;
+}
+.font-size-90 {
+    font-size:0.9em;
+}
+.font-size-85 {
+    font-size:0.85em;
 }
 .font-size-80 {
     font-size:0.8em;
@@ -432,20 +497,32 @@ body {
     background-repeat:no-repeat;
     background-image:initial;
 }
-#upload-photo div {
-    height:30px;
+#upload-cover-photo {
+    border:2px dashed #d5dddc;
+    height:110px;
+    width:100%;
+    border-radius:14px;
+    position:relative;
+    display:inline-block;
+    cursor: pointer;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:initial;
+}
+#upload-photo div, #upload-cover-photo div {
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
     color:#d5dddc;
     font-size:2.6em;
-    line-height:20px;
+    font-family: Gotham-Book, serif;
 }
-#upload-photo.active {
+#upload-photo.active, #upload-cover-photo.active {
     border:2px solid #d5dddc;
 }
-#upload-photo.active div {
+#upload-photo.active div, #upload-cover-photo.active div {
     display:none;
 }
 #save-as-draft {
@@ -457,4 +534,122 @@ body {
     font-family:Gotham-Thin, serif;
     font-weight:bold;
     text-decoration:underline;
+}
+.label {
+    font-family: Gotham-Book, serif;
+    color:#839392;
+    font-size:0.56em;
+    font-weight:bold;
+}
+.account-display-photo {
+    border-radius:50%;
+}
+.account-details p {
+    font-family: Gotham-Book, serif;
+    color:#839392;
+    font-size:0.58em;
+    margin-bottom:3px;
+}
+#earned-donations-container, #bank-account-information-container {
+    border-top:1px solid #eff4f3;
+}
+.earned-donations {
+    width:100%;
+    padding-top:100%;
+    background-color:#eff4f3;
+    border-radius:50%;
+    position:relative;
+}
+.earned-donations.total {
+    background-color:#00a99d;
+}
+.earned-donations div {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+}
+.earned-donations p {
+    color:#839392;
+}
+.earned-donations.total p {
+    color:#ffffff;
+}
+.earned-donations .amount {
+    font-size:1.9em;
+    font-family: 'Bebas Neue', cursive;
+    margin-bottom:3px;
+    line-height:1em;
+}
+.earned-donations .method {
+    font-size:0.59em;
+    font-family: Gotham-Book, serif;
+    margin-bottom:0px;
+}
+#bank-account-information-container td {
+    font-family: Gotham-Book, serif;
+    color:#839392;
+    font-size:0.58em;
+    margin-bottom:3px;
+}
+.account-edit-text {
+    font-family: Gotham-Book, serif;
+    font-size:0.56em;
+    font-weight:bold;
+    text-align:right;
+    color:#00a99d;
+}
+#cover-photo {
+    background-color:#d4dddc;
+    height:180px;
+    width:100%;
+    background-image:initial;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#deceased-photo-container {
+    text-align:center;
+    margin-top:-70px;
+}
+#deceased-photo {
+    display: inline-block;
+    width:140px;
+    height:140px;
+    background-color:#839392;
+    border-radius:50%;
+    background-image:initial;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.stroke-1 {
+    -webkit-text-stroke-width:0.01em;
+}
+.stroke-2 {
+    -webkit-text-stroke-width:0.02em;
+}
+.stroke-3 {
+    -webkit-text-stroke-width:0.03em;
+}
+#interment-container {
+    border-top:1px solid #4d5958;
+    border-bottom:1px solid #4d5958;
+}
+.line-height-160 {
+    line-height:1.6em;
+}
+#back-button {
+    top:15px;
+    left:15px;
+    height:40px;
+    width:40px;
+    background-color:#ffffff;
+    color:#00a99d;
+    border-radius:50%;
+    border:2px solid #00a99d;
+    padding-top:5px;
+    text-align:center;
+    display:block;
 }

@@ -16,19 +16,19 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->dateTime('date_of_birth');
-            $table->dateTime('date_of_death');
-            $table->string('funeral');
-            $table->dateTime('start_of_campaign');
-            $table->dateTime('end_of_campaign');
-            $table->string('street');
-            $table->string('city');
-            $table->string('province');
-            $table->string('postal_code');
-            $table->string('story');
-            $table->string('is_draft');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->date('date_of_death')->nullable();
+            $table->string('funeral')->nullable();
+            $table->date('start_of_campaign')->nullable();
+            $table->date('end_of_campaign')->nullable();
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->text('story')->nullable();
+            $table->tinyInteger('is_draft');
             $table->timestamps();
         });
     }
