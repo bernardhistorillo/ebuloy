@@ -232,6 +232,14 @@ body {
     font-size:1.2em;
     color:#ffffff;
 }
+.c-btn #search-icon {
+    position:absolute;
+    top:0.57em;
+    right:0.9em;
+    font-size:1.2em;
+    color:#00a99d;
+    width:26px;
+}
 .testimonial {
     font-family:Gotham-Thin, serif;
     text-align:center;
@@ -331,6 +339,17 @@ body {
     color:#00a99d;
     font-size:1.2em;
 }
+.form-group.form-group-2 .form-control {
+    padding:10px 14px;
+    height:initial;
+    font-size: 0.7em;
+}
+.form-group.form-group-2 select.form-control {
+    padding-left:10px;
+}
+.form-group.form-group-2 .form-control::placeholder {
+    color:#839392;
+}
 .modal-title {
     font-family: Gotham-Book, serif;
     color:#839392;
@@ -407,6 +426,12 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     border-radius:50%;
+}
+.width-30 {
+    width:30px;
+}
+.width-32 {
+    width:32px;
 }
 .width-40 {
     width:40px;
@@ -525,7 +550,7 @@ body {
 #upload-photo.active div, #upload-cover-photo.active div {
     display:none;
 }
-#save-as-draft {
+#save-as-draft, #cancel-search {
     color:#839392;
     text-align:center;
     font-size:0.85em;
@@ -652,4 +677,56 @@ body {
     padding-top:5px;
     text-align:center;
     display:block;
+}
+#public-memorial-campaigns-nav {
+    width:100%;
+}
+#public-memorial-campaigns-nav p {
+    font-family: Gotham-Book, serif;
+    font-size:0.7em;
+    color:#00a99d;
+    margin-bottom:0px;
+    padding-left:12px;
+    padding-top:4px;
+}
+#public-memorial-campaigns-nav .nav-link:not(.active) #search-active, #public-memorial-campaigns-nav .nav-link.active #search-inactive {
+    display:none;
+}
+#public-memorial-campaigns-nav .nav-link.active #search-active, #public-memorial-campaigns-nav .nav-link:not(.active) #search-inactive {
+    display:inline-block;
+}
+#public-campaigns-card .card-body {
+    min-height: calc(100vh - 250px);
+}
+.filter-pills-container {
+    margin-top:20px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.filter-pills {
+    font-family: Gotham-Book, serif;
+    background-color:#e1eae9;
+    color:#839392;
+    line-height: 1.1em;
+    font-size:0.7em;
+    text-align:center;
+    padding:8px 14px;
+    border-radius:20px;
+    margin:0 3px 8px 3px;
+    position:relative;
+}
+.filter-pills.active {
+    background-color:#b2ceca;
+    color:#ffffff;
+}
+.filter-pills .fas {
+    padding-left:4px;
+}
+.filter-pills.active .fas {
+    display:inline-block;
+}
+.filter-pills:not(.active) .fas {
+    display:none;
 }

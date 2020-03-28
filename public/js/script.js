@@ -273,7 +273,7 @@ $(document).on("click", ".create-campaign", function() {
                 $("#upload-cover-photo").removeClass("active");
                 $("#upload-cover-photo, #cover-photo").css("background-image", "initial");
                 cover_photo_uploader.val('');
-                
+
                 window.location = "#page-5";
             }
         } else {
@@ -316,3 +316,21 @@ $(document).on("click", "#preview-campaign", function() {
     $("#address").html(street + ", " + city + ", " + province + ", " + postal_code);
     $("#story").html(story);
 });
+
+$(document).on("click", ".nav-link-search-campaign", function() {
+    if($(this).attr("href") == "#nav-campaigns") {
+        $(".nav-link[href='#nav-search']").removeClass("active");
+    } else {
+        $(".nav-link[href='#nav-campaigns']").removeClass("active");
+    }
+});
+
+$(document).on("click", ".filter-pills", function() {
+    if($(this).hasClass("active")) {
+        $(this).removeClass("active");
+    } else {
+        $(this).addClass("active");
+    }
+});
+
+

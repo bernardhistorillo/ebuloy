@@ -91,7 +91,7 @@ class SignupController extends Controller
     
             $user->addMediaFromUrl($facebook_user->getAvatar())->toMediaCollection('display_photos');
         }
-    
+        
         Auth::loginUsingId($user->id);
         
         return redirect()->route('dashboard');
