@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'user_info']], function() {
 });
 
 Route::get('/try', function() {
-//    Auth::logout();
-    Auth::loginUsingId(1);
+    Auth::logout();
+//    Auth::loginUsingId(1);
+//    \Illuminate\Support\Facades\Artisan::call('storage:link');
 });

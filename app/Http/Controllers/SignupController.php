@@ -96,4 +96,32 @@ class SignupController extends Controller
         
         return redirect()->route('dashboard');
     }
+    
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    
+    public function handleGoogleCallback(Request $request)
+    {
+        $google_user = Socialite::driver('google')->user();
+        
+        $user = User::select('id')
+            ->where('google_id', $google_user->getId())->first();
+        
+        if(!$user) {
+            $user = User::create([
+                'google_id' => $google_user->getId(),
+                'email_address' => $google_user->getEmail(),
+                'first_name' => $google_user->user["given_name"],
+                'last_name' => $google_user->user["family_name"]
+            ]);
+            
+            $user->addMediaFromUrl($google_user->getAvatar())->toMediaCollection('display_photos');
+        }
+        
+        Auth::loginUsingId($user->id);
+        
+        return redirect()->route('dashboard');
+    }
 }
