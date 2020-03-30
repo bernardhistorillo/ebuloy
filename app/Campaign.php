@@ -14,9 +14,8 @@ class Campaign extends Model implements HasMedia
         'user_id', 'first_name', 'last_name', 'date_of_birth', 'date_of_death', 'funeral', 'start_of_campaign', 'end_of_campaign', 'street', 'city', 'province', 'postal_code', 'story', 'is_draft'
     ];
     
-    public static function tags() {
-        return [
-          'Male', 'Female', 'Children', 'Adult', 'Age 60+', 'Veteran', 'Politician', 'Hero', 'Public Figure'
-        ];
+    public function search_filters() {
+        return $this->hasMany('App\AppliedSearchFilter')->select('search_filter_id')->pluck('search_filter_id')->all();
     }
+    
 }

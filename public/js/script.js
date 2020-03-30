@@ -221,6 +221,32 @@ $(document).on("submit", "#signup-form", function(e) {
     }).always(always);
 });
 
+$(document).on("submit", "#signin-form", function(e) {
+    e.preventDefault();
+
+    $("#loading").addClass("active");
+
+    var formData = new FormData($("#signin-form")[0]);
+
+    $.ajax({
+        url: $("#route-signin-submit-form").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            window.location = response.redirect;
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});
+
 $(document).on("click", '#upload-photo', function() {
     $("#upload-photo").removeClass("active");
     $("#upload-photo, #deceased-photo").css("background-image", "initial");
@@ -250,6 +276,12 @@ $(document).on("click", ".create-campaign", function() {
     formData.append('is_draft', is_draft);
     formData.append('image', (uploader[0].files[0] == undefined) ? '' : uploader[0].files[0]);
     formData.append('cover_photo', (cover_photo_uploader[0].files[0] == undefined) ? '' : cover_photo_uploader[0].files[0]);
+
+    let search_filters = [];
+    $(".filter-pills.active").each(function() {
+        search_filters.push($(this).data("id"));
+    });
+    formData.append('search_filters', JSON.stringify(search_filters));
 
     $.ajax({
         url: $("#route-create-campaign-submit").html(),

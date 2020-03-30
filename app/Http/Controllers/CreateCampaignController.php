@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AppliedSearchFilter;
 use App\Campaign;
+use App\SearchFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -24,7 +26,9 @@ class CreateCampaignController extends Controller
             }
         }
         
-        return view('pages.create-campaign', compact('campaign'));
+        $search_filters = SearchFilter::all();
+        
+        return view('pages.create-campaign', compact('campaign', 'search_filters'));
     }
     
     public function submit(Request $request) {
@@ -123,6 +127,18 @@ class CreateCampaignController extends Controller
     
         if($request->file('cover_photo')) {
             $campaign->addMediaFromUrl($request->file('cover_photo'))->toMediaCollection('cover_photos');
+        }
+    
+        AppliedSearchFilter::where('campaign_id', $campaign->id)
+            ->delete();
+    
+        $search_filters = json_decode($request->search_filters, true);
+        
+        foreach($search_filters as $search_filter) {
+            AppliedSearchFilter::create([
+                'campaign_id' => $campaign->id,
+                'search_filter_id' => $search_filter,
+            ]);
         }
         
         $response['route'] = route('dashboard');

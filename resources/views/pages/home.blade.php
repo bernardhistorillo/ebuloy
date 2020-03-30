@@ -20,7 +20,7 @@ Home
 
                 <div class="px-4">
                     <a href="#page-1" class="btn c-btn c-btn-1 mb-3">How it works</a>
-                    <button class="btn c-btn c-btn-2">Sign In</button>
+                    <a href="{{ route('signin') }}" class="btn c-btn c-btn-2">Sign In</a>
                 </div>
 
                 <div class="text-center my-4 py-3">

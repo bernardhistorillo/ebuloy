@@ -67,6 +67,17 @@ Home
                             <div>+</div>
                         </div>
                     </div>
+
+                    <p class="pages-sub-header mt-3 pt-2 font-size-80">Search Filters
+
+                    <div class="filter-pills-container">
+                        @foreach($search_filters as $search_filter)
+                        <div class="filter-pills {{ (in_array($search_filter['id'], $campaign->search_filters())) ? 'active' : '' }}" data-id="{{ $search_filter['id'] }}">
+                            <span>{{ $search_filter['name'] }}</span>
+                            <i class="fas fa-check"></i>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="pt-4 mt-3 px-4">

@@ -73,9 +73,9 @@ Home
                         </div>
 
                         <div class="filter-pills-container">
-                            @foreach($tags as $tag)
-                            <div class="filter-pills">
-                                <span>{{ $tag }}</span>
+                            @foreach($search_filters as $search_filter)
+                            <div class="filter-pills" data-id="{{ $search_filter['id'] }}">
+                                <span>{{ $search_filter['name'] }}</span>
                                 <i class="fas fa-check"></i>
                             </div>
                             @endforeach

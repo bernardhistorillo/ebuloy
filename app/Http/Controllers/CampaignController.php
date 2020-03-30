@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Campaign;
-use Illuminate\Http\Request;
+use App\SearchFilter;
 
 class CampaignController extends Controller
 {
     public function index() {
-        $tags = Campaign::tags();
-        return view('pages.campaigns', compact('tags'));
+        $search_filters = SearchFilter::all();
+        
+        return view('pages.campaigns', compact('search_filters'));
     }
 }

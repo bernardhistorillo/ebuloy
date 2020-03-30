@@ -10,7 +10,10 @@ Route::post('/signup/submit-form', 'SignupController@submit_form')->name('signup
 Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
 
 Route::group(['middleware' => ['guest']], function() {
-    Route::get('/signin', 'SignupController@index')->name('signin');
+    Route::get('/signin', 'SigninController@index')->name('signin');
+    Route::get('/signin/form', 'SigninController@form')->name('signin.form');
+    Route::post('/signin/submit-form', 'SigninController@submit_form')->name('signin.submit-form');
+    
     Route::get('/signup', 'SignupController@index')->name('signup');
     
     Route::get('auth/facebook', 'SignupController@redirectToFacebook')->name('auth.facebook');

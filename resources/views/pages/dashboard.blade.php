@@ -96,7 +96,7 @@ Home
 
                         <table class="w-100 mt-3">
                             <tr>
-                                <td class="width-85"><img src="{{ Auth::user()->getMedia('display_photos')->last()->getFullUrl() }}" class="w-100 account-display-photo" /></td>
+                                <td class="width-85"><img src="{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png')  }}" class="w-100 account-display-photo" /></td>
                                 <td class="pl-3 account-details">
                                     <p class="font-weight-bold">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
                                     <p>{{ Auth::user()->mobile_number }}</p>

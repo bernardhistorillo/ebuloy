@@ -350,13 +350,29 @@ body {
 .form-group.form-group-2 .form-control::placeholder {
     color:#839392;
 }
+.modal-content {
+    border-radius:14px;
+}
+.modal .modal-header {
+    padding:10px 16px;
+}
 .modal-title {
     font-family: Gotham-Book, serif;
     color:#839392;
+    text-align:center;
+    width:100%;
+    font-size:1.2em;
 }
 .modal-body {
     font-family: Gotham-Book, serif;
     color:#839392;
+    font-size:0.9em;
+}
+.modal .close {
+    color:#839392;
+    position:absolute;
+    top:10px;
+    right:14px;
 }
 .dashboard-card {
     border-radius:14px;
@@ -426,6 +442,9 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     border-radius:50%;
+}
+.width-initial {
+    width:initial;
 }
 .width-30 {
     width:30px;
