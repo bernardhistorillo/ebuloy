@@ -83,7 +83,7 @@ class CreateCampaignController extends Controller
                 'city' => 'max:191',
                 'province' => 'max:191',
                 'postal_code' => 'max:191',
-                'story' => 'max:191',
+                'story' => 'nullable',
                 'image' => 'nullable|image',
                 'cover_photo' => 'nullable|image'
             ]);
@@ -100,7 +100,7 @@ class CreateCampaignController extends Controller
                 'city' => 'required|max:191',
                 'province' => 'required|max:191',
                 'postal_code' => 'required|max:191',
-                'story' => 'required|max:191',
+                'story' => 'required',
                 'image' => 'nullable|image',
                 'cover_photo' => 'nullable|image'
             ]);

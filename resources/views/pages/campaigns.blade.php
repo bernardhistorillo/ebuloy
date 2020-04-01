@@ -7,6 +7,9 @@ Home
 @section("content")
     <div id="overlay"></div>
 
+    @if($campaign)
+        @include('partials.view-campaign')
+    @else
     <div class="bg-persian-green wrapper">
         <div class="text-center pt-4">
             <img class="ebuloy-persian-green-img" src="{{ url("img/ebuloy-white.png") }}" />
@@ -33,28 +36,28 @@ Home
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-campaigns" role="tabpanel" aria-labelledby="nav-campaigns-tab">
                     <div class="card-body">
-                        @foreach(Auth::user()->campaigns() as $campaign)
-                        <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }}" data-draft-link="{{ ($campaign['is_draft'] == 1) ? route('create-campaign', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) : '' }}">
-                            <table class="w-100">
-                                <tr>
-                                    <td class="width-40">
-                                        <div class="image" style="background-image:url('{{ ($campaign->hasMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')" class="w-100"></div>
-                                    </td>
-                                    <td class="pl-3">
-                                        <p class="name mb-0">{{ ($campaign['first_name']) ? $campaign['first_name'] : '----------' }} {{ ($campaign['last_name']) ? $campaign['last_name'] : '----------' }}</p>
-                                        <div class="row no-gutters">
-                                            <div class="col-4">
-                                                <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">End:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['end_of_campaign']) ? \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('j M') : '-- ---' }}</span>
+                        @foreach($campaigns as $campaign)
+                        <a href="{{ route('campaigns', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) }}" class="text-decoration-none">
+                            <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }}">
+                                <table class="w-100">
+                                    <tr>
+                                        <td class="width-40">
+                                            <div class="image" style="background-image:url('{{ ($campaign->hasMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')" class="w-100"></div>
+                                        </td>
+                                        <td class="pl-3">
+                                            <p class="name mb-0">{{ $campaign['first_name'] . ' ' . $campaign['last_name'] }}</p>
+                                            <div class="row no-gutters">
+                                                <div class="col-12">
+                                                    <span class="label">Location:</span> <span class="value">{{ $campaign['city'] }}</span>
+                                                    <span class="label pl-2">Died:</span> <span class="value">{{ \Carbon\Carbon::parse($campaign['date_of_death'])->format('j M') }}</span>
+                                                </div>
                                             </div>
-                                            <div class="col-8">
-                                                <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">Donations:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['is_draft'] == 1) ? 0 : 0 }}</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="status {{ ($campaign['is_draft'] == 0) ? 'active' : '' }}">{{ ($campaign['is_draft'] == 1) ? 'DRAFT' : 'ACTIVE' }}</div>
-                        </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <p class="story">{{ $campaign['story'] }}</p>
+                            </div>
+                        </a>
                         @endforeach
                     </div>
                 </div>
@@ -94,4 +97,5 @@ Home
             <div class="card-footer"></div>
         </div>
     </div>
+    @endif
 @stop

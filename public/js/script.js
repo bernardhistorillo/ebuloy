@@ -263,10 +263,6 @@ $(document).on("click", '#upload-cover-photo', function() {
     cover_photo_uploader.click();
 });
 
-$(document).on("click", ".deceased-item.draft", function() {
-    window.location = $(this).data("draft-link");
-});
-
 $(document).on("click", ".create-campaign", function() {
     $("#loading").addClass("active");
 

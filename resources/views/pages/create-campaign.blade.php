@@ -181,41 +181,7 @@ Home
     </form>
 
     <div class="page cached" data-name="page-4" data-order="4">
-        <div id="cover-photo" style="background-image:url('{{ optional(optional(optional($campaign)->getMedia('cover_photos'))->last())->getFullUrl() }}')">
-            <div class="go-back position-fixed" id="back-button">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-        </div>
-
-        <div id="deceased-photo-container">
-            <div id="deceased-photo" style="background-image:url('{{ optional(optional(optional($campaign)->getMedia('deceased_photos'))->last())->getFullUrl() }}')"></div>
-        </div>
-
-        <div class="py-3 px-5">
-            <p class="pages-sub-header font-size-90 stroke-3 mb-1">Rest in Peace</p>
-            <p class="pages-header font-size-150 mb-2" id="name">Juan Dela Cruz</p>
-            <p class="pages-sub-header font-size-75 stroke-3 mb-1">BORN: <span id="born">Nov 1, 1945</span></p>
-            <p class="pages-sub-header font-size-75 stroke-3 mb-0">DIED: <span id="died">Nov 2, 2019</span></p>
-        </div>
-
-        <div class="py-3 px-5" id="interment-container">
-            <p class="pages-sub-header font-size-80 stroke-3 line-height-160 mb-0" id="funeral">St. Peter Chapel</p>
-            <p class="pages-sub-header font-size-80 stroke-3 line-height-160 mb-0" id="address">Legazpi Diversion Rd., Bogtong, Legazpi City, Albay, 4500</p>
-        </div>
-
-        <div class="py-3 px-5">
-            <p class="pages-sub-header font-size-80 stroke-3 line-height-160 mb-0" id="story" data-dummy="Lorem ipsum dolor sit amet, consectetur adipicsing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitaion ullamco laboris nisi ut aliquip ex ea commodo consequat."></p>
-        </div>
-
-        <div class="text-center pt-2">
-            <button class="btn c-btn c-btn-8 c-btn-social-2 mr-3"><i class="fab fa-facebook-f"></i></button>
-            <button class="btn c-btn c-btn-8 c-btn-social-2 mr-3"><i class="fab fa-instagram"></i></button>
-            <button class="btn c-btn c-btn-8 c-btn-social-2"><i class="fab fa-twitter"></i></button>
-        </div>
-
-        <div class="py-4 mt-4 px-5">
-            <button class="btn c-btn c-btn-1 mb-3">DONATE</button>
-        </div>
+        @include('partials.view-campaign')
     </div>
 
     <div class="page cached" data-name="page-5" data-order="5">

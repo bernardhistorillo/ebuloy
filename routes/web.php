@@ -7,7 +7,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/signup/form', 'SignupController@form')->name('signup.form');
 Route::post('/signup/submit-form', 'SignupController@submit_form')->name('signup.submit-form');
 
-Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
+Route::get('/campaigns/{id?}', 'CampaignController@index')->name('campaigns');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/signin', 'SigninController@index')->name('signin');
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth', 'user_info']], function() {
 });
 
 Route::get('/try', function() {
-    Auth::logout();
-//    Auth::loginUsingId(1);
+//    Auth::logout();
+    Auth::loginUsingId(1);
 //    \Illuminate\Support\Facades\Artisan::call('storage:link');
 });
