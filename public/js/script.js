@@ -361,4 +361,104 @@ $(document).on("click", ".filter-pills", function() {
     }
 });
 
+$(document).on("click", "#search-campaign", function() {
+    let search_string = $("input[name='search_value']").val().toLowerCase();
+    let search_filters = [];
+    let search_location = $("select[name='location']").val();
 
+    let search_filters_string = '';
+
+    $(".filter-pills.active").each(function() {
+        search_filters.push($(this).data("id"));
+        search_filters_string += $(this).find(".filter-name").html() + ", ";
+    });
+
+    search_filters_string = search_filters_string.substr(0, search_filters_string.length - 2);
+
+    let search_with_string = function() {
+        if(search_string != "") {
+            $(".deceased-item-container").each(function() {
+                let name = $(this).find(".name").html().toLowerCase();
+
+                if(!name.includes(search_string)) {
+                    $(this).addClass("d-none");
+                }
+            });
+
+            $("#searched-string-value").html("'" + search_string + "'");
+            $("#searched-string-label").removeClass("d-none");
+        }
+    };
+
+    let search_with_location = function() {
+        if(search_location != "") {
+            $(".deceased-item-container").each(function() {
+                let location = $(this).find(".location").html().toLowerCase();
+
+                if(search_location.toLowerCase() != location) {
+                    $(this).addClass("d-none");
+                }
+            });
+
+            $("#searched-location-value").html(search_location);
+            $("#searched-location-label").removeClass("d-none");
+        }
+    };
+
+    let search_with_filters = function() {
+        if(search_filters.length > 0) {
+            $(".deceased-item-container:not(.d-none)").each(function() {
+                let campaign_filters = JSON.parse($(this).find(".search-filters").html());
+
+                for(let i = 0; i < search_filters.length; i++) {
+                    if(!campaign_filters.includes(search_filters[i])) {
+                        $(this).addClass("d-none");
+                        break;
+                    }
+                }
+            });
+
+            $("#searched-filters-value").html(search_filters_string);
+            $("#searched-filters-label").removeClass("d-none");
+        }
+    };
+
+    $("#searched-details").addClass("d-none");
+    $("#searched-string-label").addClass("d-none");
+    $("#searched-location-label").addClass("d-none");
+    $("#searched-filters-label").addClass("d-none");
+    $("#no-results-found").addClass("d-none");
+    $(".deceased-item-container").removeClass("d-none");
+
+    if(search_string != "" || search_location != "" || search_filters.length > 0) {
+        $("#loading").addClass("active");
+
+        setTimeout(function() {
+            $("#searched-details").removeClass("d-none");
+            $(".deceased-item-container").removeClass("d-none");
+
+            search_with_string();
+            search_with_location();
+            search_with_filters();
+
+            if($(".deceased-item-container:not(.d-none)")[0]) {
+                $("#no-results-found").addClass("d-none");
+            } else {
+                $("#no-results-found").removeClass("d-none");
+            }
+
+            $("#cancel-search").tab("show");
+            $(".nav-link[href='#nav-search']").removeClass("active");
+
+            $("#loading").removeClass("active");
+        },100);
+    }
+});
+
+$(document).on("click", "#cancel-search", function() {
+    $("input[name='search_value']").val("");
+    $("select[name='location']").val("");
+    $(".filter-pills").removeClass("active");
+
+    $("#search-campaign").trigger("click");
+});

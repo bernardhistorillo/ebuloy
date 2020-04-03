@@ -24,4 +24,14 @@ class Campaign extends Model implements HasMedia
             ->where('end_of_campaign', '>=', Carbon::now())
             ->get();
     }
+    
+    public static function locations() {
+        return Campaign::select('city')
+            ->where('is_draft', 0)
+            ->where('end_of_campaign', '>=', Carbon::now())
+            ->groupBy('city')
+            ->orderBy('city', 'asc')
+            ->pluck('city')
+            ->all();
+    }
 }

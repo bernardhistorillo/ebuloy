@@ -10,6 +10,14 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="d58dd0b1-24ce-4d30-a68e-4337fdd9899f" name="ebuloy.ph" url="http://ftp.anonuevo.co">
+        <fileTransfer host="ftp.anonuevo.co" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

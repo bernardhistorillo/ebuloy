@@ -19,7 +19,9 @@ class CampaignController extends Controller
                 ->first();
             
             if($campaign) {
-                return view('pages.campaigns', compact('campaign'));
+                $in_public_campaigns = true;
+                
+                return view('pages.campaigns', compact('campaign', 'in_public_campaigns'));
             } else {
                 return redirect()->route('campaigns');
             }
@@ -27,7 +29,8 @@ class CampaignController extends Controller
         
         $search_filters = SearchFilter::all();
         $campaigns = Campaign::fetch_all();
+        $locations = Campaign::locations();
         
-        return view('pages.campaigns', compact('search_filters', 'campaign', 'campaigns'));
+        return view('pages.campaigns', compact('search_filters', 'campaign', 'campaigns', 'locations'));
     }
 }

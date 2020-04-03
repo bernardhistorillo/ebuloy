@@ -27,8 +27,9 @@ class CreateCampaignController extends Controller
         }
         
         $search_filters = SearchFilter::all();
+        $in_public_campaigns = false;
         
-        return view('pages.create-campaign', compact('campaign', 'search_filters'));
+        return view('pages.create-campaign', compact('campaign', 'search_filters', 'in_public_campaigns'));
     }
     
     public function submit(Request $request) {

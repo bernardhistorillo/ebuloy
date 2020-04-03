@@ -72,7 +72,7 @@ Home
 
                     <div class="filter-pills-container">
                         @foreach($search_filters as $search_filter)
-                        <div class="filter-pills {{ (in_array($search_filter['id'], $campaign->search_filters())) ? 'active' : '' }}" data-id="{{ $search_filter['id'] }}">
+                        <div class="filter-pills {{ ($campaign && in_array($search_filter['id'], $campaign->search_filters())) ? 'active' : '' }}" data-id="{{ $search_filter['id'] }}">
                             <span>{{ $search_filter['name'] }}</span>
                             <i class="fas fa-check"></i>
                         </div>
