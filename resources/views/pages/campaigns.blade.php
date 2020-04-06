@@ -11,7 +11,167 @@ Home
     </div>
 
     @if($campaign)
+    <div class="page" data-name="home" data-order="1">
         @include('partials.view-campaign')
+    </div>
+
+    <div class="page cached" data-name="page-2" data-order="2">
+        <div class="bg-persian-green wrapper">
+            <div class="text-center pt-4">
+                <img class="ebuloy-persian-green-img" src="{{ url("img/ebuloy-white.png") }}" />
+            </div>
+
+            <div class="card dashboard-card mt-4">
+                <div class="p-3 border-bottom-color-1">
+                    <p class="gotham text-center text-color-1 font-size-75 font-weight-bold mt-2 mb-0">Amount</p>
+                    <div class="donation-amount-container">
+                        <span>Php</span>
+                        <input type="number" class="form-control" name="amount" placeholder="0.00" min="0" />
+                    </div>
+
+                    <div class="px-4 pt-3">
+                        <p class="gotham text-color-1 font-size-65 text-center line-height-190 mb-0">The Good Will has a 1% platform fee for organizers to operate our service.</p>
+                    </div>
+                </div>
+
+                <div class="p-3">
+                    @if(Auth::check())
+                    <div class="text-center pl-2 mt-1 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline d-inline-block">
+                            <input type="radio" id="donor-info-0" name="donor-info" value="account" class="custom-control-input" checked />
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-0">Use your profile for this donation</label>
+                        </div>
+                    </div>
+
+                    <div class="donation-my-profile-container donor-option-content mb-3" data-option="account">
+                        <table class="w-100">
+                            <tr>
+                                <td>
+                                    <div class="photo" style="background-image:url('{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png') }}')"></div>
+                                </td>
+                                <td class="pl-3">
+                                    <p class="gotham text-color-1 font-weight-bold font-size-80 mb-0">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
+                                    <p class="gotham text-color-1 font-size-80 mb-0">Barriada, Legazpi City</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    @endif
+
+                    <div class="text-center pl-2 mt-1 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline d-inline-block">
+                            <input type="radio" id="donor-info-1" name="donor-info" value="input" class="custom-control-input" {{ (!Auth::check()) ? 'checked' : '' }} />
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-1">{{ (Auth::check()) ? 'Or appear as' : 'Appear as' }}</label>
+                        </div>
+                    </div>
+
+                    <div class="donor-option-content" data-option="input">
+                        <div class="form-group form-group-2 mt-1 mb-2">
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" />
+                        </div>
+                        <div class="form-group form-group-2 mt-1 mb-2">
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" />
+                        </div>
+                    </div>
+
+                    <div class="text-center pl-2 mt-3">
+                        <div class="custom-control custom-radio custom-control-inline d-inline-block">
+                            <input type="radio" id="donor-info-2" name="donor-info" value="anonymous" class="custom-control-input" />
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-2">Hide my identity</label>
+                        </div>
+                    </div>
+
+                    <div class="px-4 {{ (Auth::check()) ? 'pt-4 mt-4' : 'pt-5 mt-5' }}">
+                        <button class="btn c-btn c-btn-3 mb-3" id="amount-donor-submit">Next<i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page cached" data-name="page-3" data-order="3">
+        <div class="bg-persian-green wrapper">
+            <div class="text-center pt-4">
+                <img class="ebuloy-persian-green-img" src="{{ url("img/ebuloy-white.png") }}" />
+            </div>
+
+            <div class="card dashboard-card mt-4">
+                <div class="p-3 border-bottom-color-1">
+                    <p class="gotham text-center text-color-1 font-size-75 font-weight-bold mt-2 mb-2">Your Donation</p>
+
+                    <div id="donation-amount-display">Php 15,000</div>
+
+                    <div class="donation-my-profile-container mt-3 mb-2">
+                        <div class="section d-none" data-option="account">
+                            <table class="w-100">
+                                <tr>
+                                    <td>
+                                        <div class="photo" style="background-image:url('{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png') }}')"></div>
+                                    </td>
+                                    <td class="pl-3">
+                                        <p class="gotham text-color-1 font-weight-bold font-size-80 mb-0">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
+                                        <p class="gotham text-color-1 font-size-80 mb-0">Barriada, Legazpi City</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="section d-none" data-option="input">
+                            <p class="gotham text-color-1 font-weight-bold font-size-100 text-center mb-0"><i class="fas fa-user mr-1"></i> <span id="donor-name"></span></p>
+                        </div>
+
+                        <div class="section d-none" data-option="anonymous">
+                            <p class="gotham text-color-1 font-weight-bold font-size-100 text-center mb-0"><i class="fas fa-user-secret mr-1"></i> Anonymous</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 border-bottom-color-1">
+                    <p class="gotham text-color-1 font-weight-bold font-size-80 text-center mt-2" for="donor-info-0">Choose Payment Options</p>
+
+                    <div id="accordion" class="payment-methods-container">
+                        <div class="card">
+                            <div class="card-header p-0" id="headingOne">
+                                <h5 class="text-center mb-0">
+                                    <button class="btn btn-link collapsed w-100" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <img src="{{ url('img/payment-methods/gcash.png') }}" />
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body text-center">
+                                    <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
+                                    <p class="gotham text-color-1 font-size-160 mb-0">09123456789</p>
+                                    <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09123456789">Copy Number<i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header p-0" id="headingTwo">
+                                <h5 class="text-center mb-0">
+                                    <button class="btn btn-link collapsed w-100" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <img src="{{ url('img/payment-methods/paymaya.png') }}" />
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body text-center">
+                                    <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
+                                    <p class="gotham text-color-1 font-size-160 mb-0">09987654321</p>
+                                    <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09987654321">Copy Number<i class="fas fa-copy"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 mt-4 px-4">
+                        <button class="btn c-btn c-btn-3 mb-3">Next<i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @else
     <div class="bg-persian-green wrapper">
         <div class="text-center pt-4">

@@ -33,5 +33,9 @@
 </div>
 
 <div class="py-4 mt-4 px-5">
+    @if($in_public_campaigns)
+    <a href="#page-2" class="btn c-btn c-btn-1 mb-3">DONATE</a>
+    @else
     <button class="btn c-btn c-btn-1 mb-3">DONATE</button>
+    @endif
 </div>

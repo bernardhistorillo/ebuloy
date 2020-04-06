@@ -94,6 +94,17 @@ var is_json_string = function(string) {
     return true;
 };
 
+var numberFormat = function(x, decimal) {
+    x = parseFloat(x);
+    var parts = x.toFixed(2).toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if(decimal) {
+        return parts.join(".");
+    } else {
+        return parts[0];
+    }
+};
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -461,4 +472,52 @@ $(document).on("click", "#cancel-search", function() {
     $(".filter-pills").removeClass("active");
 
     $("#search-campaign").trigger("click");
+});
+
+$(document).on("click", ".donor-option-content", function() {
+    $("input[name='donor-info'][value='" + $(this).data("option") + "']").prop("checked", true);
+});
+
+$(document).on("click", "#amount-donor-submit", function() {
+    let amount = parseFloat($("input[name='amount']").val());
+
+    if(!isNaN(amount) && amount > 0) {
+        $("#donation-amount-display").html("Php " + numberFormat(amount, true));
+
+        let donor_info = $("input[name='donor-info']:checked").val();
+
+        $(".donation-my-profile-container .section").addClass("d-none");
+
+        if(donor_info == "account") {
+            $(".donation-my-profile-container .section[data-option='account']").removeClass("d-none");
+        } else if(donor_info == "input") {
+            let first_name = $("input[name='first_name']").val();
+            let last_name = $("input[name='last_name']").val();
+
+            if(first_name != "" && last_name != "") {
+                $("#donor-name").html(first_name + " " + last_name);
+
+                $(".donation-my-profile-container .section[data-option='input']").removeClass("d-none");
+            } else {
+                alertify.error("Please complete your name.");
+                return 0;
+            }
+        } else if(donor_info == "anonymous") {
+            $(".donation-my-profile-container .section[data-option='anonymous']").removeClass("d-none");
+        }
+
+        window.location = "#page-3";
+    } else {
+        alertify.error("Please input a valid amount.");
+    }
+});
+
+$(document).on("click", ".copy-to-clipboard", function() {
+    var temp = $("<input>");
+    $("body").append(temp);
+    temp.val($(this).data("copy")).select();
+    document.execCommand("copy");
+    temp.remove();
+
+    alertify.success("Copied to Clipboard!");
 });

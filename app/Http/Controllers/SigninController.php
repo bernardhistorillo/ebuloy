@@ -24,7 +24,7 @@ class SigninController extends Controller
             'password' => 'required'
         ]);
         
-        if(!Auth::attempt(['email_address' => $request->email_address, 'password' => $request->password, 'is_manual_login' => 1])) {
+        if(!Auth::attempt(['email_address' => $request->email_address, 'password' => $request->password, 'is_manual_login' => 1], true)) {
             $response['error'] = "Login credentials didn't match any account.";
         }
         

@@ -61,7 +61,7 @@ class SignupController extends Controller
         $user = User::updateOrCreate(['id' => $user_id], $request->except('confirm_password'));
     
         if(!Auth::check()) {
-            Auth::loginUsingId($user->id);
+            Auth::loginUsingId($user->id, true);
         }
         
         return $response;
@@ -92,7 +92,7 @@ class SignupController extends Controller
             $user->addMediaFromUrl($facebook_user->getAvatar())->toMediaCollection('display_photos');
         }
         
-        Auth::loginUsingId($user->id);
+        Auth::loginUsingId($user->id, true);
         
         return redirect()->route('dashboard');
     }
@@ -120,7 +120,7 @@ class SignupController extends Controller
             $user->addMediaFromUrl($google_user->getAvatar())->toMediaCollection('display_photos');
         }
         
-        Auth::loginUsingId($user->id);
+        Auth::loginUsingId($user->id, true);
         
         return redirect()->route('dashboard');
     }
