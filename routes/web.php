@@ -25,6 +25,7 @@ Route::group(['middleware' => ['guest']], function() {
 
 Route::group(['middleware' => ['auth', 'user_info']], function() {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::post('/dashboard/edit-account', 'DashboardController@edit_account')->name('dashboard.edit-account');
     
     Route::get('/create-campaign/{id?}', 'CreateCampaignController@index')->name('create-campaign');
     Route::post('/create-campaign-submit', 'CreateCampaignController@submit')->name('create-campaign-submit');

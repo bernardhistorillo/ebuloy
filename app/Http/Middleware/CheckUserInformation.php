@@ -17,7 +17,7 @@ class CheckUserInformation
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->first_name || !Auth::user()->last_name || !Auth::user()->mobile_number || !Auth::user()->email_address) {
+        if(!Auth::user()->first_name || !Auth::user()->last_name || !Auth::user()->mobile_number || !Auth::user()->email_address || !Auth::user()->address) {
             return redirect()->route('signup.form');
         }
         

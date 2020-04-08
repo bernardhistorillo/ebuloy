@@ -39,7 +39,7 @@ Home
                     <div class="text-center pl-2 mt-1 mb-2">
                         <div class="custom-control custom-radio custom-control-inline d-inline-block">
                             <input type="radio" id="donor-info-0" name="donor-info" value="account" class="custom-control-input" checked />
-                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-0">Use your profile for this donation</label>
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-210 cursor-pointer" for="donor-info-0">Use your profile for this donation</label>
                         </div>
                     </div>
 
@@ -51,7 +51,7 @@ Home
                                 </td>
                                 <td class="pl-3">
                                     <p class="gotham text-color-1 font-weight-bold font-size-80 mb-0">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
-                                    <p class="gotham text-color-1 font-size-80 mb-0">Barriada, Legazpi City</p>
+                                    <p class="gotham text-color-1 font-size-75 mb-0">{{ Auth::user()->address }}</p>
                                 </td>
                             </tr>
                         </table>
@@ -61,7 +61,7 @@ Home
                     <div class="text-center pl-2 mt-1 mb-2">
                         <div class="custom-control custom-radio custom-control-inline d-inline-block">
                             <input type="radio" id="donor-info-1" name="donor-info" value="input" class="custom-control-input" {{ (!Auth::check()) ? 'checked' : '' }} />
-                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-1">{{ (Auth::check()) ? 'Or appear as' : 'Appear as' }}</label>
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-210 cursor-pointer" for="donor-info-1">{{ (Auth::check()) ? 'Or appear as' : 'Appear as' }}</label>
                         </div>
                     </div>
 
@@ -74,10 +74,10 @@ Home
                         </div>
                     </div>
 
-                    <div class="text-center pl-2 mt-3">
+                    <div class="text-center pl-2 pt-1 mt-3">
                         <div class="custom-control custom-radio custom-control-inline d-inline-block">
                             <input type="radio" id="donor-info-2" name="donor-info" value="anonymous" class="custom-control-input" />
-                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-195 cursor-pointer" for="donor-info-2">Hide my identity</label>
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-210 cursor-pointer" for="donor-info-2">Hide my identity</label>
                         </div>
                     </div>
 
@@ -102,6 +102,7 @@ Home
                     <div id="donation-amount-display">Php 15,000</div>
 
                     <div class="donation-my-profile-container mt-3 mb-2">
+                        @if(Auth::check())
                         <div class="section d-none" data-option="account">
                             <table class="w-100">
                                 <tr>
@@ -110,11 +111,12 @@ Home
                                     </td>
                                     <td class="pl-3">
                                         <p class="gotham text-color-1 font-weight-bold font-size-80 mb-0">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
-                                        <p class="gotham text-color-1 font-size-80 mb-0">Barriada, Legazpi City</p>
+                                        <p class="gotham text-color-1 font-size-75 mb-0">{{ Auth::user()->address }}</p>
                                     </td>
                                 </tr>
                             </table>
                         </div>
+                        @endif
 
                         <div class="section d-none" data-option="input">
                             <p class="gotham text-color-1 font-weight-bold font-size-100 text-center mb-0"><i class="fas fa-user mr-1"></i> <span id="donor-name"></span></p>

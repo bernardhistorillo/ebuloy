@@ -521,3 +521,32 @@ $(document).on("click", ".copy-to-clipboard", function() {
 
     alertify.success("Copied to Clipboard!");
 });
+
+$(document).on("click", "#edit-account", function() {
+    $("#loading").addClass("active");
+
+    var formData = new FormData($("#edit-account-form")[0]);
+    formData.append('image', (uploader[0].files[0] == undefined) ? '' : uploader[0].files[0]);
+
+    $.ajax({
+        url: $("#route-edit-account").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $("#account-content").html(response.account_content);
+            $("#modal-edit-account .modal-body").html(response.edit_account_modal_content);
+
+            $("#modal-edit-account").modal("hide");
+            alertify.success("Saving changes successful");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});

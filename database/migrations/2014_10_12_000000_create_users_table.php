@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('email_address')->nullable();
+            $table->string('address')->nullable();
             $table->string('password')->nullable();
             $table->tinyInteger('is_manual_login')->nullable();
             $table->string('facebook_id')->nullable();

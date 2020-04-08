@@ -16,7 +16,7 @@ class SignupController extends Controller
     
     public function form() {
         if(Auth::check()) {
-            if(!Auth::user()->first_name || !Auth::user()->last_name || !Auth::user()->mobile_number || !Auth::user()->email_address) {
+            if(!Auth::user()->first_name || !Auth::user()->last_name || !Auth::user()->mobile_number || !Auth::user()->email_address || !Auth::user()->address) {
                 return view("pages.signup-form");
             } else {
                 return redirect()->route('dashboard');
@@ -28,7 +28,7 @@ class SignupController extends Controller
     
     public function submit_form(Request $request) {
         if(Auth::check()) {
-            if(Auth::user()->first_name && Auth::user()->last_name && Auth::user()->mobile_number && Auth::user()->email_address) {
+            if(Auth::user()->first_name && Auth::user()->last_name && Auth::user()->mobile_number && Auth::user()->email_address && Auth::user()->address) {
                 return redirect()->route('dashboard');
             }
         }
@@ -39,7 +39,8 @@ class SignupController extends Controller
             'first_name' => 'required|max:191',
             'last_name' => 'required|max:191',
             'email_address' => 'required|email|max:191',
-            'mobile_number' => 'required|digits:11'
+            'mobile_number' => 'required|digits:11',
+            'address' => 'required'
         ]);
         
         $user_id = null;

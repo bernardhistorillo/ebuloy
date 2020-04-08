@@ -86,81 +86,8 @@ Home
                 </div>
 
                 <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">
-                    <div class="px-3 pt-2 pb-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="label mb-0">ACCOUNT INFORMATION</p>
-                            </div>
-                            <div class="col-4">
-                                <p class="account-edit-text mb-0">EDIT</p>
-                            </div>
-                        </div>
-
-                        <table class="w-100 mt-3">
-                            <tr>
-                                <td class="width-85"><img src="{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png')  }}" class="w-100 account-display-photo" /></td>
-                                <td class="pl-3 account-details">
-                                    <p class="font-weight-bold">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</p>
-                                    <p>{{ Auth::user()->mobile_number }}</p>
-                                    <p class="mb-0">{{ Auth::user()->email_address }}</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div id="earned-donations-container" class="px-3 py-3">
-                        <p class="label mb-0">EARNED DONATIONS</p>
-                        <div class="row mt-3 px-2">
-                            <div class="col-4 px-2">
-                                <div class="earned-donations">
-                                    <div>
-                                        <p class="amount">2,000</p>
-                                        <p class="method">GCASH</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4 px-2">
-                                <div class="earned-donations">
-                                    <div>
-                                        <p class="amount">5,000</p>
-                                        <p class="method">PAYPAL</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4 px-2">
-                                <div class="earned-donations total">
-                                    <div>
-                                        <p class="amount">7,000</p>
-                                        <p class="method">TOTAL</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="bank-account-information-container" class="px-3 py-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="label mb-0">BANK ACCOUNT INFORMATION</p>
-                            </div>
-                            <div class="col-4">
-                                <p class="account-edit-text mb-0">EDIT</p>
-                            </div>
-                        </div>
-
-                        <table class="mt-3 w-100">
-                            <tr>
-                                <td class="width-85">Bank Name</td>
-                                <td>BDO UNIBANK</td>
-                            </tr>
-                            <tr>
-                                <td>Account No.</td>
-                                <td>**** **** **** 1234</td>
-                            </tr><tr>
-                                <td>Account Name</td>
-                                <td>Ismael Jerusalem</td>
-                            </tr>
-                        </table>
+                    <div id="account-content">
+                        @include('partials.account-content')
                     </div>
                 </div>
 
@@ -171,4 +98,24 @@ Home
             <div class="card-footer"></div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-edit-account" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-warning" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-color-7 text-white">
+                    <h5 class="modal-title">Edit Account</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    @include('partials.edit-account-modal-content')
+                </div>
+                <div class="modal-footer">
+                    <button class="btn c-btn c-btn-7" data-dismiss="modal">Cancel</button>
+                    <button class="btn c-btn c-btn-4 width-initial px-4" id="edit-account">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none" id="route-edit-account">{{ route('dashboard.edit-account') }}</div>
 @stop

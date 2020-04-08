@@ -54,6 +54,13 @@ Sign Up Form
                         <i class="fas fa-check-circle"></i>
                         @endif
                     </div>
+                    <div class="form-group mb-2">
+                        <p class="{{ (Auth::check() && Auth::user()->address) ? 'disabled' : '' }}">Address</p>
+                        <input type="text" class="form-control" name="address" placeholder="123 Street, Legazpi City, Albay" value="{{ (Auth::check() && Auth::user()->address) ? Auth::user()->address : '' }}" {{ (Auth::check() && Auth::user()->address) ? 'disabled' : '' }} />
+                        @if(Auth::check() && Auth::user()->address)
+                        <i class="fas fa-check-circle"></i>
+                        @endif
+                    </div>
                     @if(!Auth::check())
                     <div class="form-group mb-2">
                         <p>Password</p>
@@ -66,7 +73,7 @@ Sign Up Form
                     @endif
                 </div>
 
-                <div class="pt-5 {{ (Auth::check()) ? 'mt-5' : '' }} px-4">
+                <div class="pt-5 {{ (Auth::check()) ? 'mt-4' : '' }} px-4">
                     <button type="submit" class="btn c-btn c-btn-3 mb-3">Next<i class="fas fa-chevron-right"></i></button>
                 </div>
             </form>

@@ -633,9 +633,6 @@ body {
     font-size:0.56em;
     font-weight:bold;
 }
-.account-display-photo {
-    border-radius:50%;
-}
 .account-details p {
     font-family: Gotham-Book, serif;
     color:#839392;
@@ -737,6 +734,12 @@ body {
 }
 .line-height-195 {
     line-height:1.95em;
+}
+.line-height-200 {
+    line-height:2em;
+}
+.line-height-210 {
+    line-height:2.1em;
 }
 #back-button {
     top:15px;
@@ -890,4 +893,12 @@ body {
     font-family: Gotham-Book, serif;
     color: #fff;
     background: #00a99d;
+}
+.account-image-container {
+    width:100%;
+    padding-top:100%;
+    border-radius:50%;
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
 }

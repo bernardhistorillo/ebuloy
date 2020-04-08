@@ -13,7 +13,7 @@ class User extends Authenticatable implements HasMedia
     use HasMediaTrait;
     
     protected $fillable = [
-        'first_name', 'last_name', 'mobile_number', 'email_address', 'password', 'is_manual_login', 'facebook_id', 'google_id',
+        'first_name', 'last_name', 'mobile_number', 'email_address', 'address', 'password', 'is_manual_login', 'facebook_id', 'google_id',
     ];
     
     protected $hidden = [
