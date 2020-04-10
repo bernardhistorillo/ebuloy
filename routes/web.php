@@ -8,7 +8,7 @@ Route::get('/signup/form', 'SignupController@form')->name('signup.form');
 Route::post('/signup/submit-form', 'SignupController@submit_form')->name('signup.submit-form');
 
 Route::get('/campaigns/{id?}', 'CampaignController@index')->name('campaigns');
-Route::get('/campaigns/{id?}', 'CampaignController@index')->name('campaigns');
+Route::post('/donate/{id?}', 'CampaignController@donate')->name('donate');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/signin', 'SigninController@index')->name('signin');

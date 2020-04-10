@@ -135,8 +135,9 @@ Home
                         <div class="card">
                             <div class="card-header p-0" id="headingOne">
                                 <h5 class="text-center mb-0">
-                                    <button class="btn btn-link collapsed w-100" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <button class="btn btn-link collapsed w-100 accordion-button" data-toggle="collapse" data-target="#collapseOne" data-method="gcash" aria-expanded="false" aria-controls="collapseOne">
                                         <img src="{{ url('img/payment-methods/gcash.png') }}" />
+                                        <i class="fas fa-check-circle"></i>
                                     </button>
                                 </h5>
                             </div>
@@ -146,14 +147,25 @@ Home
                                     <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
                                     <p class="gotham text-color-1 font-size-160 mb-0">09123456789</p>
                                     <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09123456789">Copy Number<i class="fas fa-copy"></i></button>
+
+                                    <hr>
+
+                                    <p class="gotham text-persian-green font-size-80 mb-1">Attach a screenshot of your GCash transaction here</p>
+
+                                    <div class="px-5 mt-3">
+                                        <div class="upload-payment-transaction-photo" data-method="gcash">
+                                            <div>+</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-header p-0" id="headingTwo">
                                 <h5 class="text-center mb-0">
-                                    <button class="btn btn-link collapsed w-100" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <button class="btn btn-link collapsed w-100 accordion-button" data-toggle="collapse" data-target="#collapseTwo" data-method="paymaya" aria-expanded="false" aria-controls="collapseTwo">
                                         <img src="{{ url('img/payment-methods/paymaya.png') }}" />
+                                        <i class="fas fa-check-circle"></i>
                                     </button>
                                 </h5>
                             </div>
@@ -162,18 +174,53 @@ Home
                                     <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
                                     <p class="gotham text-color-1 font-size-160 mb-0">09987654321</p>
                                     <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09987654321">Copy Number<i class="fas fa-copy"></i></button>
+
+                                    <hr>
+
+                                    <p class="gotham text-persian-green font-size-80 mb-1">Attach a screenshot of your PayMaya transaction here</p>
+
+                                    <div class="px-5 mt-3">
+                                        <div class="upload-payment-transaction-photo" data-method="paymaya">
+                                            <div>+</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="pt-4 mt-4 px-4">
-                        <button class="btn c-btn c-btn-3 mb-3">Next<i class="fas fa-chevron-right"></i></button>
+                        <button class="btn c-btn c-btn-3 mb-3" id="donate">Next<i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="page cached" data-name="page-4" data-order="5">
+        <div class="wrapper bg-persian-green">
+            <div class="text-center pt-4">
+                <img class="ebuloy-white-img" src="{{ url("img/ebuloy-white.png") }}" />
+            </div>
+
+            <div class="my-5 pt-5 pb-4 text-center">
+                <img src="{{ url('img/dove.png') }}" class="width-70" />
+                <p class="pages-header font-size-200 text-white mb-3">Thank you<br>for your<br>donation!</p>
+            </div>
+
+            <div class="text-center my-4 py-3">
+                <a href="https://facebook.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="pt-4 mt-3 px-4">
+                <a href="{{ route('dashboard') }}" class="btn c-btn c-btn-1 mb-3">Return to Dashboard<i class="fas fa-chevron-left"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none" id="route-donate">{{ route('donate', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) }}</div>
     @else
     <div class="bg-persian-green wrapper">
         <div class="text-center pt-4">

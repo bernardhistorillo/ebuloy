@@ -1,6 +1,9 @@
 var uploader = $('<input type="file" accept="image/*" />');
-
 var cover_photo_uploader = $('<input type="file" accept="image/*" />');
+var payment_transaction_photo_uploader = {
+    gcash: $('<input type="file" accept="image/*" />'),
+    paymaya: $('<input type="file" accept="image/*" />')
+};
 
 var animateCSS = function(element, animationName, callback) {
     const node = document.querySelector(element)
@@ -145,6 +148,36 @@ cover_photo_uploader.on("change", function() {
     reader.readAsDataURL(cover_photo_uploader[0].files[0])
 });
 
+payment_transaction_photo_uploader.gcash.on("change", function() {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+
+        img.onload = function() {
+            $(".upload-payment-transaction-photo[data-method='gcash']").css("background-image", "url('" + img.src + "')");
+            $(".upload-payment-transaction-photo[data-method='gcash']").addClass("active");
+        };
+
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(payment_transaction_photo_uploader.gcash[0].files[0])
+});
+
+payment_transaction_photo_uploader.paymaya.on("change", function() {
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var img = new Image();
+
+        img.onload = function() {
+            $(".upload-payment-transaction-photo[data-method='paymaya']").css("background-image", "url('" + img.src + "')");
+            $(".upload-payment-transaction-photo[data-method='paymaya']").addClass("active");
+        };
+
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(payment_transaction_photo_uploader.paymaya[0].files[0])
+});
+
 $(window).bind("hashchange", function(e) {
     var get_hash = function(link) {
         var hash = link.split("#");
@@ -272,6 +305,16 @@ $(document).on("click", '#upload-cover-photo', function() {
     cover_photo_uploader.val('');
 
     cover_photo_uploader.click();
+});
+
+$(document).on("click", '.upload-payment-transaction-photo', function() {
+    $(this).removeClass("active");
+    $(this).css("background-image", "initial");
+
+    var payment_method = $(this).data("method");
+
+    payment_transaction_photo_uploader[payment_method].val('');
+    payment_transaction_photo_uploader[payment_method].click();
 });
 
 $(document).on("click", ".create-campaign", function() {
@@ -543,6 +586,85 @@ $(document).on("click", "#edit-account", function() {
 
             $("#modal-edit-account").modal("hide");
             alertify.success("Saving changes successful");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});
+
+$(document).on("click", "#donate", function() {
+    $("#loading").addClass("active");
+
+    let formData = new FormData($("#create-campaign-form")[0]);
+    let amount = parseFloat($("input[name='amount']").val());
+
+    if(isNaN(amount) && amount > 0) {
+        alertify.error("Please input a valid amount.");
+        return 0;
+    }
+
+    formData.append('amount', amount);
+
+    let donor_info = $("input[name='donor-info']:checked").val();
+
+    if(donor_info == "input") {
+        let first_name = $("input[name='first_name']").val();
+        let last_name = $("input[name='last_name']").val();
+
+        if(first_name == "" || last_name == "") {
+            alertify.error("Please complete your name.");
+            return 0;
+        } else {
+            formData.append('first_name', first_name);
+            formData.append('last_name', last_name);
+        }
+    }
+
+    formData.append('donor_info', donor_info);
+
+    let payment_method = $(".payment-methods-container .accordion-button:not(.collapsed)").data("method");
+
+    if(payment_method == undefined) {
+        alertify.error("Select a method on how you will send your donation.");
+        return 0;
+    }
+
+    formData.append('payment_method', payment_method);
+
+    if((payment_transaction_photo_uploader[payment_method][0].files[0] == undefined)) {
+        alertify.error("Please attach a screenshot of your " + ((payment_method == 'gcash') ? "GCash" : ((payment_method == 'paymaya') ? "PayMaya" : "")) + " transaction.");
+        return 0;
+    }
+
+    formData.append('screenshot', payment_transaction_photo_uploader[payment_method][0].files[0]);
+
+    $.ajax({
+        url: $("#route-donate").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $("input[name='amount']").val("")
+            $("input[name='first_name']").val("");
+            $("input[name='last_name']").val("");
+
+            $(".upload-payment-transaction-photo").removeClass("active");
+            $(".upload-payment-transaction-photo").css("background-image", "initial");
+
+            $("#donation-amount-display").html("Php 0.00");
+            $(".payment-methods-container .accordion-button").addClass("collapsed");
+            $(".payment-methods-container .collapse").removeClass("show");
+
+            payment_transaction_photo_uploader.gcash.val('');
+            payment_transaction_photo_uploader.paymaya.val('');
+
+            window.location = "#page-4";
         } else {
             fail(response.error);
         }

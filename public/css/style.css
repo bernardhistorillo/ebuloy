@@ -602,7 +602,20 @@ body {
     background-repeat:no-repeat;
     background-image:initial;
 }
-#upload-photo div, #upload-cover-photo div {
+.upload-payment-transaction-photo {
+    border:2px dashed #d5dddc;
+    height:240px;
+    width:120px;
+    border-radius:14px;
+    position:relative;
+    display:inline-block;
+    cursor: pointer;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-image:initial;
+}
+#upload-photo div, #upload-cover-photo div, .upload-payment-transaction-photo div {
     position:absolute;
     top:50%;
     left:50%;
@@ -611,10 +624,10 @@ body {
     font-size:2.6em;
     font-family: Gotham-Book, serif;
 }
-#upload-photo.active, #upload-cover-photo.active {
+#upload-photo.active, #upload-cover-photo.active, .upload-payment-transaction-photo.active {
     border:2px solid #d5dddc;
 }
-#upload-photo.active div, #upload-cover-photo.active div {
+#upload-photo.active div, #upload-cover-photo.active div, .upload-payment-transaction-photo.active div {
     display:none;
 }
 #save-as-draft, #cancel-search {
@@ -901,4 +914,15 @@ body {
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
+}
+.payment-methods-container .accordion-button i {
+    display:none;
+}
+.payment-methods-container .accordion-button:not(.collapsed) i {
+    position:absolute;
+    top:30px;
+    right:14px;
+    color:#00a99d;
+    font-size: 1.2em;
+    display:block;
 }
