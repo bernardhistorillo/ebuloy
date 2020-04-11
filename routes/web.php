@@ -21,18 +21,32 @@ Route::group(['middleware' => ['guest']], function() {
     Route::get('auth/facebook/callback', 'SignupController@handleFacebookCallback');
     Route::get('auth/google', 'SignupController@redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'SignupController@handleGoogleCallback');
+    
+    Route::get('/admin', 'Admin\LoginController@index')->name('admin.login');
+    Route::post('/admin/submit-login', 'Admin\LoginController@submit')->name('admin.submit-login');
 });
 
-Route::group(['middleware' => ['auth', 'user_info']], function() {
-    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::post('/dashboard/edit-account', 'DashboardController@edit_account')->name('dashboard.edit-account');
+Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['user_info']], function() {
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::post('/dashboard/edit-account', 'DashboardController@edit_account')->name('dashboard.edit-account');
     
-    Route::get('/create-campaign/{id?}', 'CreateCampaignController@index')->name('create-campaign');
-    Route::post('/create-campaign-submit', 'CreateCampaignController@submit')->name('create-campaign-submit');
+        Route::get('/create-campaign/{id?}', 'CreateCampaignController@index')->name('create-campaign');
+        Route::post('/create-campaign-submit', 'CreateCampaignController@submit')->name('create-campaign-submit');
+    });
+    
+    Route::group(['middleware' => ['role:1']], function() {
+        Route::get('/admin/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+        Route::get('/admin/campaigns', 'Admin\CampaignsController@index')->name('admin.campaigns');
+        Route::get('/admin/accounts', 'Admin\AccountsController@index')->name('admin.accounts');
+        Route::get('/admin/settings', 'Admin\SettingsController@index')->name('admin.settings');
+        
+        Route::get('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
+    });
 });
 
 Route::get('/try', function() {
-//    Auth::logout();
-    Auth::loginUsingId(1, true);
-//    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    Auth::logout();
+//    Auth::loginUsingId(1, true);
+
 });

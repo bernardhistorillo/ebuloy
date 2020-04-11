@@ -58,6 +58,11 @@ class SignupController extends Controller
                 'is_manual_login' => 1
             ]);
         }
+    
+        $request->request->add([
+            'username' => null,
+            'role' => 0
+        ]);
         
         $user = User::updateOrCreate(['id' => $user_id], $request->except('confirm_password'));
     
