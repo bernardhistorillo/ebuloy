@@ -35,7 +35,7 @@ Home
                 </div>
 
                 <div class="p-3">
-                    @if(Auth::check())
+                    @if(Auth::check() && Auth::user()->first_name && Auth::user()->last_name)
                     <div class="text-center pl-2 mt-1 mb-2">
                         <div class="custom-control custom-radio custom-control-inline d-inline-block">
                             <input type="radio" id="donor-info-0" name="donor-info" value="account" class="custom-control-input" checked />
@@ -46,7 +46,7 @@ Home
                     <div class="donation-my-profile-container donor-option-content mb-3" data-option="account">
                         <table class="w-100">
                             <tr>
-                                <td>
+                                <td class="width-70">
                                     <div class="photo" style="background-image:url('{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png') }}')"></div>
                                 </td>
                                 <td class="pl-3">
@@ -61,7 +61,7 @@ Home
                     <div class="text-center pl-2 mt-1 mb-2">
                         <div class="custom-control custom-radio custom-control-inline d-inline-block">
                             <input type="radio" id="donor-info-1" name="donor-info" value="input" class="custom-control-input" {{ (!Auth::check()) ? 'checked' : '' }} />
-                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-210 cursor-pointer" for="donor-info-1">{{ (Auth::check()) ? 'Or appear as' : 'Appear as' }}</label>
+                            <label class="custom-control-label gotham text-color-1 font-weight-bold font-size-80 line-height-210 cursor-pointer" for="donor-info-1">{{ (Auth::check() && Auth::user()->first_name && Auth::user()->last_name) ? 'Or appear as' : 'Appear as' }}</label>
                         </div>
                     </div>
 

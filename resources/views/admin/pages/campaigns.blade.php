@@ -4,6 +4,237 @@
     Campaigns
 @stop
 
-@section("content")
+@section('breadcrumbs')
+    @if(!$campaign)
+        <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
+            <li class="breadcrumb-item active">Campaigns</li>
+        </ol>
+    @else
+        <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
+            <li class="breadcrumb-item"><a href="{{ route('admin.campaigns') }}">Campaigns</a></li>
+            <li class="breadcrumb-item active">{{ $campaign['first_name'] . ' ' . $campaign['last_name'] }}</li>
+        </ol>
+    @endif
+@stop
 
+@section("content")
+    @if(!$campaign)
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered data-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Date &amp; Time Added</th>
+                            <th>Deceased</th>
+                            <th>Date of Birth &amp; Death</th>
+                            <th>Campaign Date</th>
+                            <th>Funeral</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Date &amp; Time Added</th>
+                            <th>Deceased</th>
+                            <th>Date of Birth &amp; Death</th>
+                            <th>Campaign Date</th>
+                            <th>Funeral</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach($campaigns as $campaign)
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.view-campaign', \Illuminate\Support\Facades\Crypt::encryptString($campaign["id"])) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
+                            </td>
+                            <td>{!! \Carbon\Carbon::parse($campaign["created_at"])->format('D,&\nb\sp;M&\nb\sp;j,&\nb\sp;Y g:i&\nb\sp;A') !!}</td>
+                            <td>{{ $campaign['first_name'] . ' ' . $campaign['last_name'] }}</td>
+                            <td>
+                                <div>Birth: {!! \Carbon\Carbon::parse($campaign["date_of_birth"])->format('M&\nb\sp;j,&\nb\sp;Y') !!}</div>
+                                <div>Death: {!! \Carbon\Carbon::parse($campaign["date_of_death"])->format('M&\nb\sp;j,&\nb\sp;Y') !!}</div>
+                            </td>
+                            <td>{!! \Carbon\Carbon::parse($campaign["start_of_campaign"])->format('M&\nb\sp;j,&\nb\sp;Y') . ' - ' . \Carbon\Carbon::parse($campaign["end_of_campaign"])->format('M&\nb\sp;j,&\nb\sp;Y') !!}</td>
+                            <td>{{ $campaign['funeral'] }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none" id="route-current">admin.campaigns</div>
+    @else
+    <div class="row" id="campaign-cards-container">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-user c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{{ $campaign['first_name'] . ' ' . $campaign['last_name'] }}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Deceased</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-calendar-alt c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{!! \Carbon\Carbon::parse($campaign["date_of_birth"])->format('M&\nb\sp;j,&\nb\sp;Y') . ' - ' . \Carbon\Carbon::parse($campaign["date_of_death"])->format('M&\nb\sp;j,&\nb\sp;Y') !!}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Date of Birth &amp; Death</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-calendar-week c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{!! \Carbon\Carbon::parse($campaign["start_of_campaign"])->format('M&\nb\sp;j,&\nb\sp;Y') . ' - ' . \Carbon\Carbon::parse($campaign["end_of_campaign"])->format('M&\nb\sp;j,&\nb\sp;Y') !!}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Campaign Duration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-pen-alt c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{{ $campaign["user"]['first_name'] . ' ' . $campaign["user"]['last_name'] }}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Author</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-cross c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{{ $campaign["funeral"] }}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Funeral</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-map-marker-alt c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">{{ $campaign["street"] . ' ' . $campaign["barangay"] . ', ' . $campaign["city"] . ', ' . $campaign["province"] . ', ' . $campaign["postal_code"] }}</div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Address</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if($campaign['applied_search_filters']->isNotEmpty())
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
+                        <i class="fas fa-hashtag c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-primary">
+                            @foreach($campaign['applied_search_filters'] as $applied_search_filters)
+                            <span class="badge badge-secondary p-2 text-primary bg-gray-100">{{ $applied_search_filters['search_filter']['name'] }}</span>
+                            @endforeach
+                        </div>
+                        <div class="text-muted text-uppercase font-weight-bold small mt-1">Search Filters</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        <div class="col-12 mb-4">
+            <div class="card bg-primary">
+                <div class="card-header text-white"><i class="fas fa-book mr-2"></i> Story</div>
+                <div class="card-body bg-white text-justify pb-0">{{ $campaign["story"] }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-primary">
+        <div class="card-header text-white">
+            <i class="fas fa-donate mr-2"></i> Donations
+            <span class="badge badge-danger py-1 px-2 float-right">&#8369;&nbsp;<span id="total-donations">{{ number_format($campaign->total_donations(),2) }}</span></span>
+        </div>
+        <div class="card-body bg-white">
+            <div class="table-responsive">
+                <div class="sk-three-bounce py-5 my-5 loading">
+                    <div class="sk-child sk-bounce1"></div>
+                    <div class="sk-child sk-bounce2"></div>
+                    <div class="sk-child sk-bounce3"></div>
+                </div>
+
+                <table class="table table-bordered data-table d-none">
+                    <thead>
+                        <tr>
+                            <th>Date &amp; Time</th>
+                            <th>Donor</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Date &amp; Time</th>
+                            <th>Donor</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach($campaign['donations'] as $donation)
+                        <tr>
+                            <td>{!! \Carbon\Carbon::parse($donation["created_at"])->format('D,&\nb\sp;M&\nb\sp;j,&\nb\sp;Y g:i&\nb\sp;A') !!}</td>
+                            <td>{{ ($donation['is_anonymous'] == 0) ? $donation['first_name'] . ' ' . $donation['last_name'] : 'Anonymous' }}</td>
+                            <td>&#8369;&nbsp;{{ number_format($donation['amount'],2) }}</td>
+                            <td>
+                                <a href="{{ $donation->getMedia('screenshots')->last()->getFullUrl() }}" data-fancybox="">
+                                    <img src="{{ url('img/payment-methods/' . (($donation['payment_method'] == 1) ? 'gcash' : (($donation['payment_method'] == 2) ? 'paymaya' : '')) . '.png') }}" width="80"/>
+                                </a>
+                            </td>
+                            <td class="donation-action-buttons-container" data-donation-id="{{ $donation['id'] }}">
+                                @include('admin.partials.donation-action-buttons')
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-none" id="route-current">admin.view-campaign</div>
+    <div class="d-none" id="route-donation-update-status">{{ route('admin.donations.update-status') }}</div>
+    @endif
 @stop

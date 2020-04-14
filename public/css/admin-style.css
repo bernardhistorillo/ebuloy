@@ -1,0 +1,12 @@
+.data-table {
+    text-align:center;
+}
+.data-table th, .data-table td {
+    vertical-align: middle;
+}
+#campaign-cards-container .card {
+    height:100%;
+}
+.donation-action-buttons-container .dropdown-toggle {
+    width:153px;
+}

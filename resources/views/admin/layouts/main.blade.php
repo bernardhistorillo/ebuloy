@@ -8,6 +8,8 @@
     <title>{{ config('app.name') }} Admin | @yield('title')</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.css" />
     <link href="{{ url('lib/coreui/css/coreui.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" />
     <link href="{{ url('css/admin-style.css?v=' . config('custom.version')) }}" rel="stylesheet">
     <link rel="icon" href="{{ url("img/icon.png") }}" type="image/x-icon" />
 </head>
@@ -39,12 +41,8 @@
             <ul class="c-header-nav mfs-auto">
                 <li class="c-header-nav-item px-3 c-d-legacy-none">
                     <button class="c-class-toggler c-header-nav-btn" type="button" id="header-tooltip" data-target="body" data-class="c-dark-theme" data-toggle="c-tooltip" data-placement="bottom" title="" data-original-title="Toggle Light/Dark Mode">
-                        <svg class="c-icon c-d-dark-none">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-moon"></use>
-                        </svg>
-                        <svg class="c-icon c-d-default-none">
-                            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-sun"></use>
-                        </svg>
+                        <i class="fas fa-moon c-icon c-d-dark-none"></i>
+                        <i class="fas fa-sun c-icon c-d-default-none"></i>
                     </button>
                 </li>
             </ul>
@@ -68,9 +66,7 @@
                 </li>
             </ul>
             <div class="c-subheader justify-content-between px-3">
-                <ol class="breadcrumb border-0 m-0 px-0 px-md-3">
-                    <li class="breadcrumb-item active">@yield('title')</li>
-                </ol>
+                @yield('breadcrumbs')
             </div>
         </header>
         <div class="c-body">
@@ -89,6 +85,9 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url('lib/coreui/js/coreui.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url('js/admin-script.js?v=' . config('custom.version'))  }}"></script>
 
 </body>

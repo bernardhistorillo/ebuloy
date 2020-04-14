@@ -22,6 +22,7 @@ class CreateDonationsTable extends Migration
             $table->tinyInteger('is_anonymous')->default(0);
             $table->decimal('amount',65,30);
             $table->tinyInteger('payment_method');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

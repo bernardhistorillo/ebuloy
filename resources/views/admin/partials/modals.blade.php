@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="button" data-dismiss="modal">Okay</button>
+                <button class="btn btn-success proceed" type="button" data-dismiss="modal">Okay</button>
             </div>
         </div>
     </div>
@@ -22,7 +22,8 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button class="btn btn-warning" type="button" data-dismiss="modal">Okay</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-warning proceed" type="button">Confirm</button>
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button class="btn btn-danger" type="button" data-dismiss="modal">Okay</button>
+                <button class="btn btn-danger proceed" type="button" data-dismiss="modal">Okay</button>
             </div>
         </div>
     </div>

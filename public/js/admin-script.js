@@ -97,7 +97,15 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+    var current_route = $("#route-current").html();
 
+    if(current_route == 'admin.campaigns' || current_route == 'admin.view-campaign') {
+        $(".data-table").DataTable({
+            aaSorting: []
+        });
+        $(".table-responsive .loading").addClass("d-none");
+        $(".data-table").removeClass("d-none");
+    }
 });
 
 $(document).on("submit", "#signin-form", function(e) {
@@ -131,4 +139,53 @@ $(document).on("submit", "#signin-form", function(e) {
         $("#signin-button").html("Login");
         $("#signin-button").prop("disabled", false);
     });
+});
+
+$(document).on("click", ".donation-change-status-confirm", function() {
+    let name = $(this).data("name");
+    let status = $(this).data("status");
+    let donation_id = $(this).val();
+    let status_names = ['"for verification"', "invalid", "verified"];
+
+    confirmation("Are you sure you want to set the status of " + name + "'s donation as " + status_names[status] + "?", [{
+        attribute: "id",
+        value: "donation-change-status"
+    }, {
+        attribute: "data-status",
+        value: status
+    }, {
+        attribute: "value",
+        value: donation_id
+    }]);
+});
+
+$(document).on("click", "#donation-change-status", function() {
+    processing("Processing...");
+
+    let id = $(this).val();
+
+    var formData = new FormData($("#place-order-form")[0]);
+    formData.append('id', id);
+    formData.append('status', $(this).attr("data-status"));
+
+    $.ajax({
+        url: $("#route-donation-update-status").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $(".donation-action-buttons-container[data-donation-id='" + id + "']").html(response.content);
+            $("#total-donations").html(response.total_donations);
+
+            success("Donation status has been successfully updated.", "");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
 });

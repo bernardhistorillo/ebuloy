@@ -34,4 +34,39 @@ class Campaign extends Model implements HasMedia
             ->pluck('city')
             ->all();
     }
+    
+    public static function admin_fetch_all() {
+        return Campaign::select('id', 'first_name', 'last_name', 'date_of_birth', 'date_of_death', 'funeral', 'start_of_campaign', 'end_of_campaign', 'created_at')
+            ->where('is_draft', 0)
+            ->get();
+    }
+    
+    public static function admin_fetch($id) {
+        return Campaign::where('is_draft', 0)
+            ->where('id', $id)
+            ->with('user')
+            ->with('donations')
+            ->with('applied_search_filters.search_filter')
+            ->first();
+    }
+    
+    public function user() {
+        return $this->belongsTo('App\User')->select('id', 'first_name', 'last_name');
+    }
+    
+    public function donations() {
+        return $this->hasMany('App\Donation')
+            ->select('id', 'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'payment_method', 'status', 'created_at')
+            ->orderBy('id', 'desc');
+    }
+    
+    public function applied_search_filters() {
+        return $this->hasMany('App\AppliedSearchFilter');
+    }
+    
+    public function total_donations() {
+        return $this->hasMany('App\Donation')
+            ->where('status', 2)
+            ->sum('amount');
+    }
 }

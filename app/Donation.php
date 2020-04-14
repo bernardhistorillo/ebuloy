@@ -14,6 +14,11 @@ class Donation extends Model implements HasMedia
     payment_method:
         1 => GCash
         2 => PayMaya
+    
+    status:
+        0 => For Verification
+        1 => Invalid
+        2 => Verified
     */
     
     protected $fillable = [

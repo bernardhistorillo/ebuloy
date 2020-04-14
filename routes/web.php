@@ -33,20 +33,26 @@ Route::group(['middleware' => ['auth']], function() {
     
         Route::get('/create-campaign/{id?}', 'CreateCampaignController@index')->name('create-campaign');
         Route::post('/create-campaign-submit', 'CreateCampaignController@submit')->name('create-campaign-submit');
+    
+        Route::get('/logout', 'SigninController@logout')->name('logout');
     });
     
     Route::group(['middleware' => ['role:1']], function() {
         Route::get('/admin/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
-        Route::get('/admin/campaigns', 'Admin\CampaignsController@index')->name('admin.campaigns');
         Route::get('/admin/accounts', 'Admin\AccountsController@index')->name('admin.accounts');
         Route::get('/admin/settings', 'Admin\SettingsController@index')->name('admin.settings');
+    
+        Route::get('/admin/campaigns', 'Admin\CampaignsController@index')->name('admin.campaigns');
+        Route::get('/admin/campaigns/view/{id}', 'Admin\CampaignsController@view')->name('admin.view-campaign');
+        
+        Route::post('/admin/donations/update-status', 'Admin\DonationsController@update_status')->name('admin.donations.update-status');
         
         Route::get('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
     });
 });
 
 Route::get('/try', function() {
-    Auth::logout();
-//    Auth::loginUsingId(1, true);
+//    Auth::logout();
+    Auth::loginUsingId(5, true);
 
 });
