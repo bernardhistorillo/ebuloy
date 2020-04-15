@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index() {
+        if(Auth::check()) {
+            if(Auth::user()->role == 0) {
+                Auth::logout();
+            } else if(Auth::user()->role == 1) {
+                return redirect()->route('admin.dashboard');
+            }
+        }
+        
         return view('admin.pages.login');
     }
     

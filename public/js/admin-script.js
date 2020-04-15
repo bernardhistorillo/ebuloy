@@ -99,7 +99,7 @@ $.ajaxSetup({
 $(document).ready(function() {
     var current_route = $("#route-current").html();
 
-    if(current_route == 'admin.campaigns' || current_route == 'admin.view-campaign') {
+    if(['admin.campaigns', 'admin.view-campaign', 'admin.accounts', 'admin.donations'].includes(current_route)) {
         $(".data-table").DataTable({
             aaSorting: []
         });

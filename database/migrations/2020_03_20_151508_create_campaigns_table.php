@@ -21,8 +21,8 @@ class CreateCampaignsTable extends Migration
             $table->date('date_of_birth')->nullable();
             $table->date('date_of_death')->nullable();
             $table->string('funeral')->nullable();
-            $table->date('start_of_campaign')->nullable();
-            $table->date('end_of_campaign')->nullable();
+            $table->dateTime('start_of_campaign')->nullable();
+            $table->dateTime('end_of_campaign')->nullable();
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('province')->nullable();

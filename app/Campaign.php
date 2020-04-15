@@ -21,14 +21,14 @@ class Campaign extends Model implements HasMedia
     
     public static function fetch_all() {
         return Campaign::where('is_draft', 0)
-            ->where('end_of_campaign', '>=', Carbon::now())
+            ->where('end_of_campaign', '>=', Carbon::today())
             ->get();
     }
     
     public static function locations() {
         return Campaign::select('city')
             ->where('is_draft', 0)
-            ->where('end_of_campaign', '>=', Carbon::now())
+            ->where('end_of_campaign', '>=', Carbon::today())
             ->groupBy('city')
             ->orderBy('city', 'asc')
             ->pluck('city')
@@ -69,4 +69,11 @@ class Campaign extends Model implements HasMedia
             ->where('status', 2)
             ->sum('amount');
     }
+
+    public static function active_campaigns_count() {
+        return Campaign::where('is_draft', 0)
+            ->where('end_of_campaign', '>=', Carbon::today())
+            ->count();
+    }
+
 }

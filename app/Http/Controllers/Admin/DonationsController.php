@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class DonationsController extends Controller
 {
+    public function index() {
+        $donations = Donation::fetch_all();
+        
+        return view('admin.pages.donations', compact('donations'));
+    }
+    
     public function update_status(Request $request) {
         $response['error'] = '';
         

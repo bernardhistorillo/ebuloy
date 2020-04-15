@@ -24,8 +24,6 @@ class CampaignsController extends Controller
         
         $campaign = Campaign::admin_fetch($campaign_id);
         
-//        return $campaign;
-        
         return view('admin.pages.campaigns', compact('campaign'));
     }
 }
