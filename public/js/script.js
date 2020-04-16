@@ -116,6 +116,47 @@ $.ajaxSetup({
 
 $(document).ready(function() {
     history.pushState("", document.title, window.location.pathname);
+
+    $('.line-chart').each(function() {
+        let labels = JSON.parse($(this).find(".graph-labels").html());
+        let data = JSON.parse($(this).find(".graph-data").html());
+
+        new Chart($(this)[0], {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    backgroundColor: '#99dfda',
+                    borderColor: '#00a99d',
+                    borderWidth: 1.5,
+                    pointBackgroundColor: '#00a99d',
+                    pointBorderColor: '#fff',
+                    data: data
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 10,
+                            fontFamily: 'Gotham-Book, serif',
+                            beginAtZero: true
+                        }
+                    }], xAxes: [{
+                        ticks: {
+                            fontSize: 10,
+                            fontFamily: 'Gotham-Book, serif'
+                        }
+                    }]
+                }
+            }
+        });
+    });
 });
 
 uploader.on("change", function() {

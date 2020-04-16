@@ -38,7 +38,7 @@
             <div class="earned-donations">
                 <div>
                     <p class="amount">5,000</p>
-                    <p class="method">PAYPAL</p>
+                    <p class="method">PAYMAYA</p>
                 </div>
             </div>
         </div>

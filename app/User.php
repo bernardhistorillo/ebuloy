@@ -25,7 +25,9 @@ class User extends Authenticatable implements HasMedia
     ];
     
     public function campaigns() {
-        return $this->hasMany('App\Campaign')->get();
+        return $this->hasMany('App\Campaign')
+            ->with('donations')
+            ->get();
     }
     
     public function admin_campaigns() {

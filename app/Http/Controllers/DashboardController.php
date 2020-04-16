@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,7 +11,44 @@ use Illuminate\Support\Facades\Hash;
 class DashboardController extends Controller
 {
     public function index() {
-        return view('pages.dashboard');
+        $campaigns = Auth::user()->campaigns();
+        
+        foreach($campaigns as $i => $campaign) {
+            $start_of_campaign = Carbon::parse($campaign['start_of_campaign']);
+            $end_of_campaign = Carbon::parse($campaign['end_of_campaign']);
+            
+            $donations = [];
+            $graph_labels = [];
+            $graph_data = [];
+            
+            foreach($campaign['donations'] as $donation) {
+                array_push($donations, [
+                    'date' =>  Carbon::parse($donation['created_at'])->format('Y-m-d'),
+                    'amount' => $donation['amount']
+                ]);
+            }
+            
+            while($start_of_campaign <= $end_of_campaign) {
+                $date = $start_of_campaign->format('Y-m-d');
+    
+                $amount = 0;
+                foreach($donations as $donation) {
+                    if($donation['date'] == $date) {
+                        $amount += $donation['amount'];
+                    }
+                }
+                
+                array_push($graph_labels, $start_of_campaign->format('j M'));
+                array_push($graph_data, $amount);
+    
+                $start_of_campaign->add('1 day');
+            }
+    
+            $campaigns[$i]['graph_labels'] = $graph_labels;
+            $campaigns[$i]['graph_data'] = $graph_data;
+        }
+        
+        return view('pages.dashboard', compact('campaigns'));
     }
     
     public function edit_account(Request $request) {

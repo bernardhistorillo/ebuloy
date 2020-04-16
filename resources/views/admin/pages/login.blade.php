@@ -39,11 +39,7 @@
                                     </div>
                                     <input class="form-control" type="password" name="password" placeholder="Password" required />
                                 </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <button class="btn btn-primary px-4" id="signin-button" type="submit">Login</button>
-                                    </div>
-                                </div>
+                                <button class="btn btn-primary px-4" id="signin-button" type="submit">Login</button>
                             </form>
                         </div>
                     </div>

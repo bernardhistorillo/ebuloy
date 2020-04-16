@@ -49,7 +49,7 @@ Home
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-campaign" role="tabpanel" aria-labelledby="nav-campaign-tab">
                     <div class="card-body">
-                        @foreach(Auth::user()->campaigns() as $campaign)
+                        @foreach($campaigns as $campaign)
                         <a href="{{ route('create-campaign', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) }}" class="text-decoration-none">
                             <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }}">
                                 <table class="w-100">
@@ -64,13 +64,13 @@ Home
                                                     <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">End:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['end_of_campaign']) ? \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('j M') : '-- ---' }}</span>
                                                 </div>
                                                 <div class="col-8">
-                                                    <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">Donations:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['is_draft'] == 1) ? 0 : 0 }}</span>
+                                                    <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">Donations:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['is_draft'] == 1) ? 0 : number_format($campaign->total_donations(),2) }}</span>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
-                                <div class="status {{ ($campaign['is_draft'] == 0) ? 'active' : '' }}">{{ ($campaign['is_draft'] == 1) ? 'DRAFT' : 'ACTIVE' }}</div>
+                                <div class="status {{ ($campaign['is_draft'] == 0 && $campaign['end_of_campaign'] >= \Carbon\Carbon::today()) ? 'active' : '' }}">{{ ($campaign['is_draft'] == 0) ? (($campaign['end_of_campaign'] >= \Carbon\Carbon::today()) ? 'ACTIVE' : 'ENDED') : 'DRAFT' }}</div>
                             </div>
                         </a>
                         @endforeach
@@ -82,7 +82,70 @@ Home
                 </div>
 
                 <div class="tab-pane fade" id="nav-donations" role="tabpanel" aria-labelledby="nav-donations-tab">
-                    <p class="my-5 py-5 text-center">Donations</p>
+                    <div class="card-body">
+                        @foreach($campaigns as $i => $campaign)
+                            @if($campaign['is_draft'] == 0)
+                        <div class="text-decoration-none">
+                            <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }} pb-2">
+                                <table class="w-100">
+                                    <tr>
+                                        <td class="width-40">
+                                            <div class="image" style="background-image:url('{{ ($campaign->hasMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')" class="w-100"></div>
+                                        </td>
+                                        <td class="pl-3">
+                                            <p class="name mb-0">{{ ($campaign['first_name']) ? $campaign['first_name'] : '----------' }} {{ ($campaign['last_name']) ? $campaign['last_name'] : '----------' }}</p>
+                                            <div class="row no-gutters">
+                                                <div class="col-4">
+                                                    <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">End:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['end_of_campaign']) ? \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('j M') : '-- ---' }}</span>
+                                                </div>
+                                                <div class="col-8">
+                                                    <span class="label {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">Donations:</span> <span class="value {{ ($campaign['is_draft'] == 1) ? 'disabled' : '' }}">{{ ($campaign['is_draft'] == 1) ? 0 : number_format($campaign->total_donations(),2) }}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <hr class="my-2 pb-1">
+
+                                <canvas class="line-chart pb-1">
+                                    <div class="graph-labels d-none">{{ json_encode($campaign['graph_labels']) }}</div>
+                                    <div class="graph-data d-none">{{ json_encode($campaign['graph_data']) }}</div>
+                                </canvas>
+
+                                <div class="collapse multi-collapse" id="donations-collapse-{{ $i }}">
+                                    <hr class="my-2">
+
+                                    <p class="text-color-1 gotham font-weight-bold font-size-60 pt-2 mb-2">Donations From</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            @foreach($campaign['donations'] as $donation)
+                                                @if($donation['status'] == 2)
+                                            <tr>
+                                                <td class="text-color-1 gotham font-size-60 vertical-align-middle">{{ ($donation['is_anonymous'] == 1) ? 'Anonymous' : $donation['first_name'] . ' ' . $donation['last_name'] }}</td>
+                                                <td class="text-color-1 gotham font-size-60 vertical-align-middle text-right">{{ \Carbon\Carbon::parse($donation['created_at'])->format('m/d/Y') }}</td>
+                                                <td class="text-persian-green gotham font-size-60 vertical-align-middle text-right">{{ number_format($donation['amount'],2) }}</td>
+                                            </tr>
+                                                @endif
+                                            @endforeach
+                                            @if($campaign['donations']->isEmpty())
+                                            <tr>
+                                                <td class="text-color-1 gotham font-size-60 text-center">Empty</td>
+                                            </tr>
+                                            @endif
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="text-center text-color-2 font-size-120 cursor-pointer toggle-donations-collapse" data-toggle="collapse" data-target="#donations-collapse-{{ $i }}" aria-expanded="false" aria-controls="donations-collapse-{{ $i }}">
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </div>
+                            </div>
+                        </div>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
 
                 <div class="tab-pane fade" id="nav-account" role="tabpanel" aria-labelledby="nav-account-tab">

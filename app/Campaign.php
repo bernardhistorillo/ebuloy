@@ -69,7 +69,7 @@ class Campaign extends Model implements HasMedia
             ->where('status', 2)
             ->sum('amount');
     }
-
+    
     public static function active_campaigns_count() {
         return Campaign::where('is_draft', 0)
             ->where('end_of_campaign', '>=', Carbon::today())

@@ -59,6 +59,9 @@ body {
 .text-color-1 {
     color:#839392;
 }
+.text-color-2 {
+    color:#d4dddc;
+}
 .wrapper {
     min-height:100vh;
     padding:16px;
@@ -558,6 +561,9 @@ body {
 .font-size-150 {
     font-size:1.5em;
 }
+.font-size-120 {
+    font-size:1.2em;
+}
 .font-size-90 {
     font-size:0.9em;
 }
@@ -575,6 +581,9 @@ body {
 }
 .font-size-65 {
     font-size:0.65em;
+}
+.font-size-60 {
+    font-size:0.6em;
 }
 #upload-photo {
     border:2px dashed #d5dddc;
@@ -925,4 +934,13 @@ body {
     color:#00a99d;
     font-size: 1.2em;
     display:block;
+}
+.toggle-donations-collapse[aria-expanded='false'] .fa-chevron-down, .toggle-donations-collapse[aria-expanded='true'] .fa-chevron-up {
+    display:inline-block;
+}
+.toggle-donations-collapse[aria-expanded='true'] .fa-chevron-down, .toggle-donations-collapse[aria-expanded='false'] .fa-chevron-up {
+    display:none;
+}
+.vertical-align-middle {
+    vertical-align:middle;
 }
