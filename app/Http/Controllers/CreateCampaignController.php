@@ -123,11 +123,11 @@ class CreateCampaignController extends Controller
         $campaign = Campaign::updateOrCreate(['id' => $campaign_id], $request->except(['id', 'image']));
         
         if($request->file('image')) {
-            $campaign->addMediaFromUrl($request->file('image'))->toMediaCollection('deceased_photos');
+            $campaign->addMedia($request->file('image'))->toMediaCollection('deceased_photos');
         }
     
         if($request->file('cover_photo')) {
-            $campaign->addMediaFromUrl($request->file('cover_photo'))->toMediaCollection('cover_photos');
+            $campaign->addMedia($request->file('cover_photo'))->toMediaCollection('cover_photos');
         }
     
         AppliedSearchFilter::where('campaign_id', $campaign->id)

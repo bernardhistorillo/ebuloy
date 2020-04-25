@@ -1,11 +1,13 @@
-var uploader = $('<input type="file" accept="image/*" />');
-var cover_photo_uploader = $('<input type="file" accept="image/*" />');
-var payment_transaction_photo_uploader = {
+let uploader = $('<input type="file" accept="image/*" />');
+let cover_photo_uploader = $('<input type="file" accept="image/*" />');
+let payment_transaction_photo_uploader = {
     gcash: $('<input type="file" accept="image/*" />'),
     paymaya: $('<input type="file" accept="image/*" />')
 };
+let number_picker_change_value_interval;
+let number_picker_change_value_timeout;
 
-var animateCSS = function(element, animationName, callback) {
+let animateCSS = function(element, animationName, callback) {
     const node = document.querySelector(element)
     node.classList.add('animated', animationName)
 
@@ -19,7 +21,7 @@ var animateCSS = function(element, animationName, callback) {
     node.addEventListener('animationend', handleAnimationEnd)
 };
 
-var confirmation = function(message, data) {
+let confirmation = function(message, data) {
     $("#modal-warning .modal-body").html(message);
 
     for(var i = 0; i < data.length; i++) {
@@ -35,7 +37,7 @@ var processing = function(action) {
     $("#modal-warning button[data-dismiss='modal']").css("display","none");
 };
 
-var fail = function(message) {
+let fail = function(message) {
     var content = '';
 
     if(is_json_string(message)) {
@@ -70,11 +72,11 @@ var fail = function(message) {
     $('#modal-error').modal('show');
 };
 
-var always = function() {
+let always = function() {
     $("#loading").removeClass("active");
 };
 
-var success = function(message, redirect) {
+let success = function(message, redirect) {
     $("#modal-success .modal-body").html(message);
     $("#modal-success").modal("show");
 
@@ -88,7 +90,7 @@ var success = function(message, redirect) {
     }
 };
 
-var is_json_string = function(string) {
+let is_json_string = function(string) {
     try {
         JSON.parse(string);
     } catch (e) {
@@ -97,7 +99,23 @@ var is_json_string = function(string) {
     return true;
 };
 
-var numberFormat = function(x, decimal) {
+let number_picker_change_value = function(value) {
+    let current_value = parseInt($("#number-picker div").attr("data-value"));
+
+    current_value += value;
+
+    if(current_value <= 20) {
+        current_value = 20;
+        $("#number-picker .change-value[value='-1']").prop("disabled", true);
+    } else {
+        $("#number-picker .change-value[value='-1']").prop("disabled", false);
+    }
+
+    $("#number-picker div").html("P" + current_value);
+    $("#number-picker div").attr("data-value", current_value);
+};
+
+let numberFormat = function(x, decimal) {
     x = parseFloat(x);
     var parts = x.toFixed(2).toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -457,6 +475,10 @@ $(document).on("click", ".filter-pills", function() {
 });
 
 $(document).on("click", "#search-campaign", function() {
+    if(!$(".deceased-item-container")[0]) {
+        return 0;
+    }
+
     let search_string = $("input[name='search_value']").val().toLowerCase();
     let search_filters = [];
     let search_location = $("select[name='location']").val();
@@ -713,3 +735,29 @@ $(document).on("click", "#donate", function() {
         fail(e.responseText);
     }).always(always);
 });
+
+$(document).on("click", "#number-picker .change-value", function() {
+    let value = parseInt($(this).val());
+    number_picker_change_value(value);
+});
+
+$(document).on("mousedown touchstart", "#number-picker .change-value", function() {
+    let value = parseInt($(this).val());
+
+    $(this).on("mouseleave", function() {
+        clearInterval(number_picker_change_value_interval);
+        clearTimeout(number_picker_change_value_timeout);
+    });
+
+    number_picker_change_value_timeout = setTimeout(function() {
+        number_picker_change_value_interval = setInterval(function() {
+            number_picker_change_value(value);
+        },10);
+    },1000);
+});
+
+$(document).on("mouseup touchend", "#number-picker .change-value", function() {
+    clearInterval(number_picker_change_value_interval);
+    clearTimeout(number_picker_change_value_timeout);
+});
+

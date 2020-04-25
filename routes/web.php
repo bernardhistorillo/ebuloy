@@ -4,6 +4,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/signup/form', 'SignupController@form')->name('signup.form');
 Route::post('/signup/submit-form', 'SignupController@submit_form')->name('signup.submit-form');
 
@@ -57,5 +58,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/try', function() {
 //    Auth::logout();
-    Auth::loginUsingId(1, true);
+//    Auth::loginUsingId(1, true);
+//    \Illuminate\Support\Facades\App::make('files')->link(storage_path('app/public'), public_path('storage'));
+    return asset('storage/9/lola.png');
 });
