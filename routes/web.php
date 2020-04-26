@@ -7,11 +7,12 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/signup/form', 'SignupController@form')->name('signup.form');
 Route::post('/signup/submit-form', 'SignupController@submit_form')->name('signup.submit-form');
-
 Route::get('/campaigns/{id?}', 'CampaignController@index')->name('campaigns');
 Route::post('/donate/{id?}', 'CampaignController@donate')->name('donate');
+Route::get('/logout', 'SigninController@logout')->name('logout');
 
 Route::get('/admin', 'Admin\LoginController@index')->name('admin.login');
+Route::get('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 
 Route::group(['middleware' => ['guest']], function() {
     Route::get('/signin', 'SigninController@index')->name('signin');
@@ -35,14 +36,11 @@ Route::group(['middleware' => ['auth']], function() {
     
         Route::get('/create-campaign/{id?}', 'CreateCampaignController@index')->name('create-campaign');
         Route::post('/create-campaign-submit', 'CreateCampaignController@submit')->name('create-campaign-submit');
-    
-        Route::get('/logout', 'SigninController@logout')->name('logout');
     });
     
     Route::group(['middleware' => ['role:1']], function() {
         Route::get('/admin/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
-        Route::get('/admin/settings', 'Admin\SettingsController@index')->name('admin.settings');
-    
+        
         Route::get('/admin/accounts', 'Admin\AccountsController@index')->name('admin.accounts');
         Route::get('/admin/accounts/view/{id}', 'Admin\AccountsController@view')->name('admin.accounts.view');
         
@@ -51,14 +49,14 @@ Route::group(['middleware' => ['auth']], function() {
         
         Route::get('/admin/donations', 'Admin\DonationsController@index')->name('admin.donations');
         Route::post('/admin/donations/update-status', 'Admin\DonationsController@update_status')->name('admin.donations.update-status');
-        
-        Route::get('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
+    
+        Route::get('/admin/settings', 'Admin\SettingsController@index')->name('admin.settings');
+        Route::post('/admin/settings/change-password', 'Admin\SettingsController@change_password')->name('admin.settings.change-password');
     });
 });
 
 Route::get('/try', function() {
 //    Auth::logout();
     Auth::loginUsingId(1, true);
-//    \Illuminate\Support\Facades\App::make('files')->link(storage_path('app/public'), public_path('storage'));
-//    return asset('storage/9/lola.png');
+//    return \Illuminate\Support\Facades\Hash::make('admin');
 });

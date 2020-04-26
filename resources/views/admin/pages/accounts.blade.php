@@ -125,9 +125,9 @@
         </div>
     </div>
 
-    <div class="card bg-primary">
-        <div class="card-header text-white"><i class="fas fa-calendar-alt mr-2"></i> Campaigns</div>
-        <div class="card-body bg-white">
+    <div class="card">
+        <div class="card-header"><i class="fas fa-calendar-alt mr-2"></i> Campaigns</div>
+        <div class="card-body">
             <div class="table-responsive">
                 <div class="sk-three-bounce py-5 my-5 loading">
                     <div class="sk-child sk-bounce1"></div>
@@ -181,9 +181,9 @@
         </div>
     </div>
 
-    <div class="card bg-primary">
-        <div class="card-header text-white"><i class="fas fa-donate mr-2"></i> Donations</div>
-        <div class="card-body bg-white">
+    <div class="card">
+        <div class="card-header"><i class="fas fa-donate mr-2"></i> Donations</div>
+        <div class="card-body">
             <div class="table-responsive">
                 <div class="sk-three-bounce py-5 my-5 loading">
                     <div class="sk-child sk-bounce1"></div>

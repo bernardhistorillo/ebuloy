@@ -205,9 +205,9 @@
         @endif
 
         <div class="col-12 mb-4">
-            <div class="card bg-primary">
-                <div class="card-header text-white"><i class="fas fa-book mr-2"></i> Story</div>
-                <div class="card-body bg-white text-justify pb-0">{{ $campaign["story"] }}</div>
+            <div class="card">
+                <div class="card-header"><i class="fas fa-book mr-2"></i> Story</div>
+                <div class="card-body text-justify pb-0">{{ $campaign["story"] }}</div>
             </div>
         </div>
 
@@ -244,11 +244,11 @@
         </div>
     </div>
 
-    <div class="card bg-primary">
-        <div class="card-header text-white">
+    <div class="card">
+        <div class="card-header">
             <i class="fas fa-donate mr-2"></i> Donations
         </div>
-        <div class="card-body bg-white">
+        <div class="card-body">
             <div class="table-responsive">
                 <div class="sk-three-bounce py-5 my-5 loading">
                     <div class="sk-child sk-bounce1"></div>

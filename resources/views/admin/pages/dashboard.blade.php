@@ -13,9 +13,9 @@
 @section("content")
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-4">
-            <div class="card overflow-hidden">
-                <div class="card-body p-0 d-flex align-items-center">
-                    <div class="bg-gradient-primary p-4 mfe-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="bg-gradient-primary p-3 mfe-3">
                         <i class="fas fa-calendar-check c-icon c-icon-xl"></i>
                     </div>
                     <div>
@@ -27,9 +27,9 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-4">
-            <div class="card overflow-hidden">
-                <div class="card-body p-0 d-flex align-items-center">
-                    <div class="bg-gradient-info p-4 mfe-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="bg-gradient-info p-3 mfe-3">
                         <i class="fas fa-donate c-icon c-icon-xl"></i>
                     </div>
                     <div>
@@ -41,9 +41,9 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-4">
-            <div class="card overflow-hidden">
-                <div class="card-body p-0 d-flex align-items-center">
-                    <div class="bg-gradient-warning p-4 mfe-3">
+            <div class="card">
+                <div class="card-body d-flex align-items-center">
+                    <div class="bg-gradient-warning p-3 mfe-3">
                         <i class="fas fa-users c-icon c-icon-xl"></i>
                     </div>
                     <div>

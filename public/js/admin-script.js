@@ -164,7 +164,7 @@ $(document).on("click", "#donation-change-status", function() {
 
     let id = $(this).val();
 
-    let formData = new FormData($("#place-order-form")[0]);
+    let formData = new FormData();
     formData.append('id', id);
     formData.append('status', $(this).attr("data-status"));
 
@@ -183,6 +183,41 @@ $(document).on("click", "#donation-change-status", function() {
             $("#total-tip").html(response.total_tip);
 
             success("Donation status has been successfully updated.", "");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});
+
+$(document).on("submit", "#change-password-form", function(e) {
+    e.preventDefault();
+
+    confirmation("Are you sure you want to save changes?", [{
+        attribute: "id",
+        value: "change-password"
+    }]);
+});
+
+$(document).on("click", "#change-password", function() {
+    processing("Processing...");
+
+    let formData = new FormData($("#change-password-form")[0]);
+
+    $.ajax({
+        url: $("#route-admin-change-password").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $("#change-password-form input").val("");
+
+            success("Saving changes successful.", "");
         } else {
             fail(response.error);
         }
