@@ -14,23 +14,23 @@
     <div class="nav-tabs-boxed">
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                <a class="nav-link active" data-toggle="tab" href="#for-verification" role="tab" aria-controls="home" aria-selected="true">
                     <i class="fas fa-question-circle mr-1"></i> For Verification
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                <a class="nav-link" data-toggle="tab" href="#verified" role="tab" aria-controls="profile" aria-selected="false">
                     <i class="fas fa-check-circle mr-1"></i> Verified
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">
+                <a class="nav-link" data-toggle="tab" href="#invalid" role="tab" aria-controls="messages" aria-selected="false">
                     <i class="fas fa-times-circle mr-1"></i> Invalid
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="home" role="tabpanel">
+            <div class="tab-pane active" id="for-verification" role="tabpanel">
                 <div class="table-responsive">
                     <div class="sk-three-bounce py-5 my-5 loading">
                         <div class="sk-child sk-bounce1"></div>
@@ -44,7 +44,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -54,7 +56,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -83,6 +87,8 @@
                                     @endif
                                 </td>
                                 <td>&#8369;&nbsp;{{ number_format($donation['amount'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['tip'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['amount'] + $donation['tip'],2) }}</td>
                                 <td>
                                     <a href="{{ $donation->getMedia('screenshots')->last()->getFullUrl() }}" data-fancybox="">
                                         <img src="{{ url('img/payment-methods/' . (($donation['payment_method'] == 1) ? 'gcash' : (($donation['payment_method'] == 2) ? 'paymaya' : '')) . '.png') }}" width="80"/>
@@ -98,7 +104,7 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel">
+            <div class="tab-pane fade" id="verified" role="tabpanel">
                 <div class="table-responsive">
                     <div class="sk-three-bounce py-5 my-5 loading">
                         <div class="sk-child sk-bounce1"></div>
@@ -112,7 +118,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -122,7 +130,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -151,6 +161,8 @@
                                     @endif
                                 </td>
                                 <td>&#8369;&nbsp;{{ number_format($donation['amount'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['tip'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['amount'] + $donation['tip'],2) }}</td>
                                 <td>
                                     <a href="{{ $donation->getMedia('screenshots')->last()->getFullUrl() }}" data-fancybox="">
                                         <img src="{{ url('img/payment-methods/' . (($donation['payment_method'] == 1) ? 'gcash' : (($donation['payment_method'] == 2) ? 'paymaya' : '')) . '.png') }}" width="80"/>
@@ -166,7 +178,7 @@
                     </table>
                 </div>
             </div>
-            <div class="tab-pane fade" id="messages" role="tabpanel">
+            <div class="tab-pane fade" id="invalid" role="tabpanel">
                 <div class="table-responsive">
                     <div class="sk-three-bounce py-5 my-5 loading">
                         <div class="sk-child sk-bounce1"></div>
@@ -180,7 +192,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -190,7 +204,9 @@
                                 <th>Date &amp; Time</th>
                                 <th>Campaign</th>
                                 <th>Donor</th>
-                                <th>Amount</th>
+                                <th>Donated</th>
+                                <th>Tip</th>
+                                <th>Total</th>
                                 <th>Payment Method</th>
                                 <th>Status</th>
                             </tr>
@@ -219,6 +235,8 @@
                                     @endif
                                 </td>
                                 <td>&#8369;&nbsp;{{ number_format($donation['amount'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['tip'],2) }}</td>
+                                <td>&#8369;&nbsp;{{ number_format($donation['amount'] + $donation['tip'],2) }}</td>
                                 <td>
                                     <a href="{{ $donation->getMedia('screenshots')->last()->getFullUrl() }}" data-fancybox="">
                                         <img src="{{ url('img/payment-methods/' . (($donation['payment_method'] == 1) ? 'gcash' : (($donation['payment_method'] == 2) ? 'paymaya' : '')) . '.png') }}" width="80"/>

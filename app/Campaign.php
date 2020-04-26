@@ -56,7 +56,7 @@ class Campaign extends Model implements HasMedia
     
     public function donations() {
         return $this->hasMany('App\Donation')
-            ->select('id', 'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'payment_method', 'status', 'created_at')
+            ->select('id', 'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'tip', 'payment_method', 'status', 'created_at')
             ->orderBy('id', 'desc');
     }
     
@@ -68,6 +68,12 @@ class Campaign extends Model implements HasMedia
         return $this->hasMany('App\Donation')
             ->where('status', 2)
             ->sum('amount');
+    }
+    
+    public function total_tip() {
+        return $this->hasMany('App\Donation')
+            ->where('status', 2)
+            ->sum('tip');
     }
     
     public static function active_campaigns_count() {

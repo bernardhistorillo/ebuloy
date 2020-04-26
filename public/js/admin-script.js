@@ -164,7 +164,7 @@ $(document).on("click", "#donation-change-status", function() {
 
     let id = $(this).val();
 
-    var formData = new FormData($("#place-order-form")[0]);
+    let formData = new FormData($("#place-order-form")[0]);
     formData.append('id', id);
     formData.append('status', $(this).attr("data-status"));
 
@@ -180,6 +180,7 @@ $(document).on("click", "#donation-change-status", function() {
         if(response.error == "") {
             $(".donation-action-buttons-container[data-donation-id='" + id + "']").html(response.content);
             $("#total-donations").html(response.total_donations);
+            $("#total-tip").html(response.total_tip);
 
             success("Donation status has been successfully updated.", "");
         } else {

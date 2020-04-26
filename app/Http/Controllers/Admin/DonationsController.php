@@ -26,6 +26,7 @@ class DonationsController extends Controller
         $donation = Donation::find($request->id);
         
         $response['total_donations'] = number_format(Campaign::find($donation['campaign_id'])->total_donations(), 2);
+        $response['total_tip'] = number_format(Campaign::find($donation['campaign_id'])->total_tip(), 2);
         $response['content'] = (string)view('admin.partials.donation-action-buttons', compact('donation'));
         
         return $response;

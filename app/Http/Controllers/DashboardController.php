@@ -22,10 +22,12 @@ class DashboardController extends Controller
             $graph_data = [];
             
             foreach($campaign['donations'] as $donation) {
-                array_push($donations, [
-                    'date' =>  Carbon::parse($donation['created_at'])->format('Y-m-d'),
-                    'amount' => $donation['amount']
-                ]);
+                if($donation['status'] == 2) {
+                    array_push($donations, [
+                        'date' =>  Carbon::parse($donation['created_at'])->format('Y-m-d'),
+                        'amount' => $donation['amount']
+                    ]);
+                }
             }
             
             while($start_of_campaign <= $end_of_campaign) {

@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("title")
-Home
+Create Campaign
 @stop
 
 @section("content")
@@ -123,11 +123,11 @@ Home
                         <p class="pages-sub-header text-left mt-3 mb-2 font-size-80">Campaign Duration</p>
                         <div class="form-group mb-2">
                             <p>Start of Campaign</p>
-                            <input type="date" class="form-control" name="start_of_campaign" value="{{ \Carbon\Carbon::parse($campaign['start_of_campaign'])->format('Y-m-d') }}" />
+                            <input type="date" class="form-control" name="start_of_campaign" value="{{ ($campaign['start_of_campaign']) ? \Carbon\Carbon::parse($campaign['start_of_campaign'])->format('Y-m-d') : '' }}" />
                         </div>
                         <div class="form-group mb-2">
                             <p>End of Campaign</p>
-                            <input type="date" class="form-control" name="end_of_campaign" value="{{ \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('Y-m-d') }}" />
+                            <input type="date" class="form-control" name="end_of_campaign" value="{{ ($campaign['start_of_campaign']) ? \Carbon\Carbon::parse($campaign['end_of_campaign'])->format('Y-m-d') : '' }}" />
                         </div>
 
                         <p class="pages-sub-header text-left mt-3 mb-2 font-size-80">Address</p>

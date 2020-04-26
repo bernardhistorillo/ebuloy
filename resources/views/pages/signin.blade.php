@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("title")
-Sign Up
+Sign In
 @stop
 
 @section("content")

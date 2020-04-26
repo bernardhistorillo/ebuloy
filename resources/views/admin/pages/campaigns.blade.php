@@ -210,12 +210,43 @@
                 <div class="card-body bg-white text-justify pb-0">{{ $campaign["story"] }}</div>
             </div>
         </div>
+
+        <div class="col-12">
+            <hr class="mb-4 pb-3">
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-warning p-3 mfe-3">
+                        <i class="fas fa-donate c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-warning">&#8369;&nbsp;<span id="total-donations">{{ number_format($campaign->total_donations(),2) }}</span></div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Total Donations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body px-3 py-1 d-flex align-items-center">
+                    <div class="bg-gradient-danger p-3 mfe-3">
+                        <i class="fas fa-coins c-icon c-icon-xl"></i>
+                    </div>
+                    <div>
+                        <div class="text-value text-danger">&#8369;&nbsp;<span id="total-tip">{{ number_format($campaign->total_tip(),2) }}</span></div>
+                        <div class="text-muted text-uppercase font-weight-bold small">Total Tip</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card bg-primary">
         <div class="card-header text-white">
             <i class="fas fa-donate mr-2"></i> Donations
-            <span class="badge badge-danger py-1 px-2 float-right">&#8369;&nbsp;<span id="total-donations">{{ number_format($campaign->total_donations(),2) }}</span></span>
         </div>
         <div class="card-body bg-white">
             <div class="table-responsive">
@@ -230,7 +261,9 @@
                         <tr>
                             <th>Date &amp; Time</th>
                             <th>Donor</th>
-                            <th>Amount</th>
+                            <th>Donated</th>
+                            <th>Tip</th>
+                            <th>Total</th>
                             <th>Payment Method</th>
                             <th>Status</th>
                         </tr>
@@ -239,7 +272,9 @@
                         <tr>
                             <th>Date &amp; Time</th>
                             <th>Donor</th>
-                            <th>Amount</th>
+                            <th>Donated</th>
+                            <th>Tip</th>
+                            <th>Total</th>
                             <th>Payment Method</th>
                             <th>Status</th>
                         </tr>
@@ -261,6 +296,8 @@
                                 @endif
                             </td>
                             <td>&#8369;&nbsp;{{ number_format($donation['amount'],2) }}</td>
+                            <td>&#8369;&nbsp;{{ number_format($donation['tip'],2) }}</td>
+                            <td>&#8369;&nbsp;{{ number_format($donation['amount'] + $donation['tip'],2) }}</td>
                             <td>
                                 <a href="{{ $donation->getMedia('screenshots')->last()->getFullUrl() }}" data-fancybox="">
                                     <img src="{{ url('img/payment-methods/' . (($donation['payment_method'] == 1) ? 'gcash' : (($donation['payment_method'] == 2) ? 'paymaya' : '')) . '.png') }}" width="80"/>

@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("title")
-Home
+Dashboard
 @stop
 
 @section("content")

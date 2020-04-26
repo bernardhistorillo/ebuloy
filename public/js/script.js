@@ -588,7 +588,11 @@ $(document).on("click", "#amount-donor-submit", function() {
     let amount = parseFloat($("input[name='amount']").val());
 
     if(!isNaN(amount) && amount > 0) {
+        let tip = parseInt($("#number-picker div").attr("data-value"));
+
         $("#donation-amount-display").html("Php " + numberFormat(amount, true));
+        $("#tip-display").html(numberFormat(tip, true));
+        $("#total-payment").html(numberFormat(amount + tip, true));
 
         let donor_info = $("input[name='donor-info']:checked").val();
 
@@ -658,10 +662,9 @@ $(document).on("click", "#edit-account", function() {
 });
 
 $(document).on("click", "#donate", function() {
-    $("#loading").addClass("active");
-
-    let formData = new FormData($("#create-campaign-form")[0]);
+    let formData = new FormData();
     let amount = parseFloat($("input[name='amount']").val());
+    let tip = parseInt($("#number-picker div").attr("data-value"));
 
     if(isNaN(amount) && amount > 0) {
         alertify.error("Please input a valid amount.");
@@ -669,6 +672,13 @@ $(document).on("click", "#donate", function() {
     }
 
     formData.append('amount', amount);
+
+    if(isNaN(tip) && tip < 20) {
+        alertify.error("Please input a valid tip.");
+        return 0;
+    }
+
+    formData.append('tip', tip);
 
     let donor_info = $("input[name='donor-info']:checked").val();
 
@@ -702,6 +712,8 @@ $(document).on("click", "#donate", function() {
     }
 
     formData.append('screenshot', payment_transaction_photo_uploader[payment_method][0].files[0]);
+
+    $("#loading").addClass("active");
 
     $.ajax({
         url: $("#route-donate").html(),

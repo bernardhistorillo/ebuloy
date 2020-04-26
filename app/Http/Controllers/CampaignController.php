@@ -42,7 +42,8 @@ class CampaignController extends Controller
         $campaign_id = Crypt::decryptString($id);
         
         $request->validate([
-            'amount' => 'required|numeric|gt:0'
+            'amount' => 'required|numeric|gt:0',
+            'tip' => 'required|numeric|gt:19'
         ]);
         
         if(!in_array($request->payment_method, ['gcash', 'paymaya'])) {

@@ -1,4 +1,4 @@
-<div id="cover-photo" style="background-image:url('{{ optional(optional(optional($campaign)->getMedia('cover_photos'))->last())->getFullUrl() }}')">
+<div id="cover-photo" style="background-image:url('{{ ($campaign->hasMedia('cover_photos')) ? $campaign->getMedia('cover_photos')->last()->getFullUrl() : '' }}')">
     @if(!$in_public_campaigns)
     <div class="go-back position-fixed" id="back-button">
         <i class="fas fa-arrow-left"></i>
@@ -7,7 +7,7 @@
 </div>
 
 <div id="deceased-photo-container">
-    <div id="deceased-photo" style="background-image:url('{{ (optional($campaign)->getMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')"></div>
+    <div id="deceased-photo" style="background-image:url('{{ ($campaign->hasMedia('deceased_photos')) ? $campaign->getMedia('deceased_photos')->last()->getFullUrl() : url('img/default/deceased.png') }}')"></div>
 </div>
 
 <div class="py-3 px-5">

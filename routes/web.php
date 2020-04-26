@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/try', function() {
 //    Auth::logout();
-//    Auth::loginUsingId(1, true);
+    Auth::loginUsingId(1, true);
 //    \Illuminate\Support\Facades\App::make('files')->link(storage_path('app/public'), public_path('storage'));
-    return asset('storage/9/lola.png');
+//    return asset('storage/9/lola.png');
 });

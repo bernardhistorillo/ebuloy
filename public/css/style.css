@@ -507,6 +507,9 @@ body {
 .width-110 {
     width:110px;
 }
+.width-50-p {
+    width:50%;
+}
 .deceased-item .name {
     font-family: Gotham-Book, serif;
     color:#839392;
@@ -1002,4 +1005,28 @@ body {
 }
 #menu-bar i {
     font-size:1.7em;
+}
+@media (min-width: 576px) {
+    .wrapper-2 {
+        padding-left:130px;
+        padding-right:130px;
+    }
+}
+@media (min-width: 768px) {
+    .wrapper-2 {
+        padding-left:220px;
+        padding-right:220px;
+    }
+}
+@media (min-width: 992px) {
+    .wrapper-2 {
+        padding-left:330px;
+        padding-right:330px;
+    }
+}
+@media (min-width: 1200px) {
+    .wrapper-2 {
+        padding-left:435px;
+        padding-right:435px;
+    }
 }

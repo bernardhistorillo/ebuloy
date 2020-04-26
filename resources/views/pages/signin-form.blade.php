@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("title")
-Sign Up Form
+Sign In Form
 @stop
 
 @section("content")

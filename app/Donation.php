@@ -22,11 +22,11 @@ class Donation extends Model implements HasMedia
     */
     
     protected $fillable = [
-        'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'payment_method'
+        'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'tip', 'payment_method'
     ];
     
     public static function fetch_all() {
-        return Donation::select('id', 'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'payment_method', 'status', 'created_at')
+        return Donation::select('id', 'campaign_id', 'user_id', 'first_name', 'last_name', 'is_anonymous', 'amount', 'tip', 'payment_method', 'status', 'created_at')
             ->with('campaign')
             ->orderBy('id', 'desc')
             ->get();

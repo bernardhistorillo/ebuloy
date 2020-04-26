@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section("title")
-Home
+Campaigns
 @stop
 
 @section("content")
@@ -119,14 +119,25 @@ Home
 
                             <div id="donation-amount-display">Php 15,000</div>
 
-                            <p class="gotham text-center text-color-1 font-size-75 mt-2 mb-2">Tip: P20</p>
+                            <div class="table-responsive mt-3">
+                                <table class="table table-bordered table-sm text-center">
+                                    <tr class="bg-color-1">
+                                        <th class="width-50-p gotham font-size-75 text-color-1">Tip</th>
+                                        <th class="gotham font-size-75 text-color-1">Total</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="gotham font-size-75 text-color-1">Php <span id="tip-display">20.00</span></td>
+                                        <td class="gotham font-size-75 text-color-1">Php <span id="total-payment">15,020.00</span></td>
+                                    </tr>
+                                </table>
+                            </div>
 
-                            <div class="donation-my-profile-container mt-3 mb-2">
+                            <div class="donation-my-profile-container mt-2 mb-2">
                                 @if(Auth::check())
                                 <div class="section d-none" data-option="account">
                                     <table class="w-100">
                                         <tr>
-                                            <td>
+                                            <td class="width-70">
                                                 <div class="photo" style="background-image:url('{{ (Auth::user()->hasMedia('display_photos')) ? Auth::user()->getMedia('display_photos')->last()->getFullUrl() : url('img/default/user.png') }}')"></div>
                                             </td>
                                             <td class="pl-3">
@@ -292,6 +303,7 @@ Home
                                 <p class="pages-sub-header font-size-80 font-weight-bold mt-5 d-none" id="no-results-found">No Results Found</p>
 
                                 @foreach($campaigns as $campaign)
+                                    @if($campaign['is_draft'] == 0 && $campaign['end_of_campaign'] >= \Carbon\Carbon::today())
                                 <a href="{{ route('campaigns', \Illuminate\Support\Facades\Crypt::encryptString($campaign['id'])) }}" class="text-decoration-none deceased-item-container">
                                     <div class="deceased-item {{ ($campaign['is_draft'] == 1) ? 'draft' : '' }}">
                                         <div class="search-filters d-none">{{ json_encode($campaign->search_filters()) }}</div>
@@ -315,6 +327,7 @@ Home
                                         <p class="story">{{ $campaign['story'] }}</p>
                                     </div>
                                 </a>
+                                    @endif
                                 @endforeach
                                 @if($campaigns->isEmpty())
                                 <p class="gotham text-center text-color-1 font-size-80 my-5">No campaigns right now</p>
