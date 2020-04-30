@@ -270,7 +270,7 @@ body {
     color:#00a99d;
     width:26px;
 }
-.c-btn i.fa-copy {
+.c-btn i.fa-copy, .c-btn i.fa-qrcode {
     position:absolute;
     top:0.7em;
     right:1.2em;
@@ -506,6 +506,9 @@ body {
 }
 .width-110 {
     width:110px;
+}
+.width-162 {
+    width:162px;
 }
 .width-50-p {
     width:50%;

@@ -60,3 +60,7 @@ Route::get('/try', function() {
     Auth::loginUsingId(1, true);
 //    return \Illuminate\Support\Facades\Hash::make('admin');
 });
+
+Route::get('/config-cache', function() {
+    \Illuminate\Support\Facades\Artisan::call('config:cache');
+});

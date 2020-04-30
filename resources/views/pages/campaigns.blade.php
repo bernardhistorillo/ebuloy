@@ -176,8 +176,8 @@ Campaigns
                                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body text-center">
                                             <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
-                                            <p class="gotham text-color-1 font-size-160 mb-0">09123456789</p>
-                                            <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09123456789">Copy Number<i class="fas fa-copy"></i></button>
+                                            <p class="gotham text-color-1 font-size-160 mb-0">09561525513</p>
+                                            <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09561525513">Copy Number<i class="fas fa-copy"></i></button>
 
                                             <hr>
 
@@ -203,8 +203,8 @@ Campaigns
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body text-center">
                                             <p class="gotham text-persian-green font-size-80 mb-1">Mobile Number</p>
-                                            <p class="gotham text-color-1 font-size-160 mb-0">09987654321</p>
-                                            <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09987654321">Copy Number<i class="fas fa-copy"></i></button>
+                                            <p class="gotham text-color-1 font-size-160 mb-0">09561525513</p>
+                                            <button class="btn c-btn c-btn-9 mt-2 copy-to-clipboard" data-copy="09561525513">Copy Number<i class="fas fa-copy"></i></button>
 
                                             <hr>
 
