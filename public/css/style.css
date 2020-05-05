@@ -50,6 +50,9 @@ body {
 .gotham {
     font-family: Gotham-Book, serif;
 }
+.gotham-thin {
+    font-family: Gotham-Thin, serif;
+}
 .bg-persian-green {
     background-color:#00a99d;
 }
@@ -76,6 +79,9 @@ body {
     width:6em;
     display:inline-block;
 }
+.home-ebuloy-white-img-2 {
+    width:3.8em;
+}
 .ebuloy-persian-green-img, .ebuloy-white-img {
     width:8.5em;
     display:inline-block;
@@ -83,10 +89,13 @@ body {
 .brand-tag-line {
     color:#ffffff;
     text-align:center;
-    font-size:1.3em;
-    line-height:1.3em;
-    -webkit-text-stroke-width:0.02em;
+    font-size:1.1em;
+    line-height:1.4em;
     font-family:Gotham-Book, serif;
+}
+#nurse-kid-image {
+    display:inline-block;
+    height:calc(100vh - 255px);
 }
 .c-btn {
     width:100%;
@@ -237,9 +246,9 @@ body {
     box-shadow:none!important;
 }
 .c-btn-social {
-    height:1.8em;
-    width:1.8em;
-    padding:0.15em;
+    height:2.2em;
+    width:2.2em;
+    padding:0.36em;
     font-size:0.75em;
 }
 .c-btn-social-2 {
@@ -772,6 +781,9 @@ body {
     border-top:1px solid #4d5958;
     border-bottom:1px solid #4d5958;
 }
+.line-height-140 {
+    line-height:1.4em;
+}
 .line-height-160 {
     line-height:1.6em;
 }
@@ -1009,27 +1021,66 @@ body {
 #menu-bar i {
     font-size:1.7em;
 }
-@media (min-width: 576px) {
-    .wrapper-2 {
-        padding-left:130px;
-        padding-right:130px;
-    }
+.text-stroke-1 {
+    -webkit-text-stroke-width:0.01em;
 }
-@media (min-width: 768px) {
-    .wrapper-2 {
-        padding-left:220px;
-        padding-right:220px;
-    }
+.text-stroke-2 {
+    -webkit-text-stroke-width:0.02em;
 }
-@media (min-width: 992px) {
-    .wrapper-2 {
-        padding-left:330px;
-        padding-right:330px;
-    }
+.text-stroke-3 {
+    -webkit-text-stroke-width:0.03em;
 }
-@media (min-width: 1200px) {
-    .wrapper-2 {
-        padding-left:435px;
-        padding-right:435px;
-    }
+.text-stroke-4 {
+    -webkit-text-stroke-width:0.04em;
 }
+.text-stroke-5 {
+    -webkit-text-stroke-width:0.05em;
+}
+.min-height-initial {
+    min-height: initial;
+}
+.deceased-item-card {
+    background-color:white;
+    border-radius:60px;
+    width:100%;
+    padding:16px 12px 32px 12px;
+}
+.deceased-item-card .deceased-photo {
+    display: inline-block;
+    width:65px;
+    height:65px;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+.deceased-item-card .story {
+    max-height: 64px;
+    font-family: Gotham-Thin, serif;
+    text-align:center;
+    font-weight: bold;
+    overflow:hidden;
+}
+/*@media (min-width: 576px) {*/
+/*    .wrapper-2 {*/
+/*        padding-left:130px;*/
+/*        padding-right:130px;*/
+/*    }*/
+/*}*/
+/*@media (min-width: 768px) {*/
+/*    .wrapper-2 {*/
+/*        padding-left:220px;*/
+/*        padding-right:220px;*/
+/*    }*/
+/*}*/
+/*@media (min-width: 992px) {*/
+/*    .wrapper-2 {*/
+/*        padding-left:330px;*/
+/*        padding-right:330px;*/
+/*    }*/
+/*}*/
+/*@media (min-width: 1200px) {*/
+/*    .wrapper-2 {*/
+/*        padding-left:435px;*/
+/*        padding-right:435px;*/
+/*    }*/
+/*}*/

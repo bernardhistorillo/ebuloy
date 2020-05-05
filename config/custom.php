@@ -2,5 +2,5 @@
 
 return [
 //    'version' => date('YmdHis')
-    'version' => 2
+    'version' => 4
 ];

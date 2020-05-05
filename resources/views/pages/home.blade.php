@@ -12,45 +12,150 @@ Home
             <div id="overlay"></div>
 
             <div class="page" data-name="home" data-order="1">
-                <div class="bg-persian-green wrapper-2">
+                <div class="bg-persian-green wrapper-2 position-relative">
+                    <div class="text-center position-absolute" style="bottom:0; width:calc(100% - 32px)">
+                        <img id="nurse-kid-image" src="{{ url('img/nurse-kid.png') }}" />
+                    </div>
+
                     <div class="container">
                         <div class="position-relative text-center pt-4">
-                            <img class="ebuloy-white-img-2" src="{{ url("img/ebuloy-white-2.png") }}" />
+                            <img class="ebuloy-white-img-2 home-ebuloy-white-img-2" src="{{ url("img/ebuloy-white-2.png") }}" />
                             <div id="menu-bar">
                                 <i class="fas fa-bars text-white sidebarCollapse"></i>
                             </div>
                         </div>
 
-                        <div class="my-3 py-3">
-                            <p class="brand-tag-line">eBuloy is better<br>than your sincerest<br>condolences.</p>
+                        <div class="mt-4 mb-5 py-3">
+                            <p class="brand-tag-line">They took care of our families.<br>Now we take care of theirs.</p>
                         </div>
+                    </div>
 
-                        <div class="px-4">
-                            <a href="#page-1" class="btn c-btn c-btn-1 mb-3">How it works</a>
-                            <a href="{{ route('signin') }}" class="btn c-btn c-btn-2">Sign In</a>
-                        </div>
-
-                        <div class="text-center my-4 py-3">
+                    <div class="position-absolute" style="bottom:20px; width:calc(100% - 32px)">
+                        <div class="text-center mb-4 pb-2">
                             <a href="https://facebook.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://instagram.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-instagram"></i></a>
                             <a href="https://twitter.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social"><i class="fab fa-twitter"></i></a>
                         </div>
 
-                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                                    <p class="testimonial author">- anonymous 1</p>
-                                </div>
-                                <div class="carousel-item">
-                                    <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                                    <p class="testimonial author">- anonymous 2</p>
-                                </div>
-                                <div class="carousel-item">
-                                    <p class="testimonial">"Thanks ebuloy for making it possible."</p>
-                                    <p class="testimonial author">- anonymous 3</p>
+                        <div class="px-4">
+                            <a href="{{ route('campaigns') }}" class="btn c-btn c-btn-2 mb-3">Send eBuloy</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white wrapper-2 min-height-initial">
+                    <div class="container">
+                        <div class="my-3 pt-3 pb-2 px-3">
+                            <p class="pages-header font-weight-bold text-stroke-1">About eBuloy</p>
+
+                            <p class="text-persian-green font-size-90 text-center gotham text-stroke-3 mt-4 pt-3">Our Vision</p>
+                            <p class="pages-sub-header">We want to modernize the Filipino family tradition of abuloy through technology and connectivity.</p>
+
+                            <p class="text-persian-green font-size-90 text-center gotham text-stroke-3 mt-4 pt-3">Our Mission</p>
+                            <p class="pages-sub-header">To educate people in the importance of continuing the abuloy tradition through mobile technology.</p>
+                            <p class="pages-sub-header">To simplify giving abuloy to families who need it the most.</p>
+                            <p class="pages-sub-header">To expand and improve access to financial support for families in their time of grief.</p>
+                        </div>
+
+                        <div class="px-4 my-4">
+                            <a href="#page-1" class="btn c-btn c-btn-3 mb-3">How it works</a>
+                            <a href="{{ route('signin') }}" class="btn c-btn c-btn-1">Sign In</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-color-1 wrapper-2 min-height-initial">
+                    <div class="container">
+                        <div class="my-3 pt-3 pb-2 px-3">
+                            <p class="pages-header font-weight-bold text-stroke-1">Give &amp; Celebrate<br>A Life</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6 px-2 mb-3">
+                                <div class="deceased-item-card">
+                                    <div class="text-center">
+                                        <div class="deceased-photo" style="background-image:url('{{ url('img/default/deceased.png') }}')"></div>
+                                    </div>
+
+                                    <p class="gotham text-center text-color-1 font-size-70 font-weight-bold line-height-140 my-2">Name of Deceased</p>
+
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
+
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
                                 </div>
                             </div>
+
+                            <div class="col-6 px-2 mb-3">
+                                <div class="deceased-item-card">
+                                    <div class="text-center">
+                                        <div class="deceased-photo" style="background-image:url('{{ url('img/default/deceased.png') }}')"></div>
+                                    </div>
+
+                                    <p class="gotham text-center text-color-1 font-size-70 font-weight-bold line-height-140 my-2">Name of Deceased</p>
+
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
+
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 px-2 mb-3">
+                                <div class="deceased-item-card">
+                                    <div class="text-center">
+                                        <div class="deceased-photo" style="background-image:url('{{ url('img/default/deceased.png') }}')"></div>
+                                    </div>
+
+                                    <p class="gotham text-center text-color-1 font-size-70 font-weight-bold line-height-140 my-2">Name of Deceased</p>
+
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
+
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 px-2 mb-3">
+                                <div class="deceased-item-card">
+                                    <div class="text-center">
+                                        <div class="deceased-photo" style="background-image:url('{{ url('img/default/deceased.png') }}')"></div>
+                                    </div>
+
+                                    <p class="gotham text-center text-color-1 font-size-70 font-weight-bold line-height-140 my-2">Name of Deceased</p>
+
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
+
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center my-4">
+                            <a href="{{ route('campaigns') }}" class="gotham text-color-1 font-weight-bold font-size-90">
+                                View More Campaigns<br>
+                                <i class="fas fa-chevron-down text-color-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-persian-green wrapper-2 min-height-initial">
+                    <div class="container">
+                        <div class="text-center pt-3">
+                            <img class="ebuloy-white-img-2 home-ebuloy-white-img-2" src="{{ url("img/ebuloy-white-2.png") }}" />
+                        </div>
+
+                        <div class="text-center pt-1 my-4 pb-2">
+                            <a href="https://facebook.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social mr-3"><i class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com" target="_blank" class="btn c-btn c-btn-2 c-btn-social"><i class="fab fa-twitter"></i></a>
+                        </div>
+
+                        <div class="text-center mb-4">
+                            <p class="gotham text-white font-size-60 mb-0">&copy; eBuloy 2020 Legazpi City, All rights reserved.</p>
+                            <p class="gotham text-white font-size-60 mb-0">Terms &amp; Policy</p>
                         </div>
                     </div>
                 </div>

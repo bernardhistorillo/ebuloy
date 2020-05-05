@@ -10,7 +10,7 @@
     </div>
 
     <ul class="list-unstyled components py-0">
-        <p class="gotham text-center font-size-90 bg-color-1 text-color-3 px-4 py-3 mb-0">eBuloy is better<br>than your sincerest condolences.</p>
+        <p class="gotham text-center font-size-90 bg-color-1 text-color-3 px-4 py-3 mb-0">They took care of our families. Now we take care of theirs.</p>
         <li class="{{ (\Request::route()->getName() == "home") ? "active" : "" }}">
             <a href="{{ route('home') }}" class="gotham d-flex">
                 <div class="width-30 text-center mr-2">
