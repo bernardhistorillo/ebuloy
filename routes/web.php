@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/try', function() {
 //    Auth::logout();
-    Auth::loginUsingId(1, true);
+//    Auth::loginUsingId(1, true);
 //    return \Illuminate\Support\Facades\Hash::make('admin');
 });
 

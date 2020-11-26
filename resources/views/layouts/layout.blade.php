@@ -12,22 +12,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/themes/bootstrap.min.css" integrity="sha256-WIcJjf4DF+5g6G6ChFG2dZcUxdZ6EDmGca5c/sd9VN0=" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ url("lib/sidebar/style.css?v=" . config('custom.version')) }}" />
-    <link rel="stylesheet" href="{{ url("css/style.css?v=" . config('custom.version')) }}" />
+    <link rel="stylesheet" href="{{ mix("/css/all.css") }}" />
     <link rel="icon" href="{{ url("img/icon.png") }}" type="image/x-icon" />
 </head>
 
 <body>
     @yield('content')
     @include('partials.basic-modals')
-
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha256-QFMAm4xflERDUh0NdY1pa0+MovGNNdM8gda//qDRH64=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha256-TQq84xX6vkwR0Qs1qH5ADkP+MvH0W+9E7TdHJsoIQiM=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="{{ url("lib/sidebar/script.js?v=" . config('custom.version')) }}"></script>
-    <script src="{{ url("js/script.js?v=" . config('custom.version')) }}"></script>
+    <script src="{{ mix("/js/all.js") }}"></script>
 </body>
 </html>

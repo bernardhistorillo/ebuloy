@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }} Admin | Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.css" />
     <link href="{{ url('lib/coreui/css/coreui.min.css') }}" rel="stylesheet">
-    <link href="{{ url('css/admin-style.css?v=' . config('custom.version')) }}" rel="stylesheet">
+    <link href="{{ mix('css/admin-all.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ url("img/icon.png") }}" type="image/x-icon" />
 </head>
 
@@ -54,7 +54,7 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url('lib/coreui/js/coreui.bundle.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('js/admin-script.js?v=' . config('custom.version'))  }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/admin-all.js')  }}"></script>
 
 </body>
 </html>

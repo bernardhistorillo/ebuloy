@@ -11,5 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.styles([
+    'resources/css/admin-style.css',
+], 'public/css/admin-all.css')
+.styles([
+    'resources/css/sidebar/style.css',
+    'resources/css/style.css',
+], 'public/css/all.css')
+.scripts([
+    'resources/js/admin-script.js',
+], 'public/js/admin-all.js')
+.scripts([
+    'resources/js/sidebar/script.js',
+    'resources/js/script.js',
+], 'public/js/all.js');

@@ -10,7 +10,7 @@
     <link href="{{ url('lib/coreui/css/coreui.min.css') }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous" />
-    <link href="{{ url('css/admin-style.css?v=' . config('custom.version')) }}" rel="stylesheet">
+    <link href="{{ mix('/css/admin-all.css') }}" rel="stylesheet">
     <link rel="icon" href="{{ url("img/icon.png") }}" type="image/x-icon" />
 </head>
 
@@ -89,7 +89,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url('js/admin-script.js?v=' . config('custom.version'))  }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/admin-all.js')  }}"></script>
 
 </body>
 </html>
