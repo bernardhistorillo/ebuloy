@@ -80,9 +80,9 @@ Home
                                     <p class="gotham text-center text-color-1 font-size-70 font-weight-bold line-height-140 my-2">Name of Deceased</p>
 
                                     <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
-                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
+                                    <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">25 Nov</span></p>
 
-                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0" style="shape-outside: circle(50%)">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
                                 </div>
                             </div>
 
@@ -112,7 +112,11 @@ Home
                                     <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
                                     <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
 
-                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-2">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                    
+                                    <div class="text-center mb-2">
+                                        <button class="btn c-btn c-btn-9 width-initial px-3 py-1 font-size-50">View</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -127,7 +131,11 @@ Home
                                     <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Location:</span> <span class="text-persian-green">Legazpi City</span></p>
                                     <p class="gotham-thin font-weight-bold text-stroke text-center text-color-1 font-size-60 line-height-140 mb-0"><span class="text-stroke-1">Died:</span> <span class="text-persian-green">24 Nov</span></p>
 
-                                    <p class="story text-stroke-1 text-color-1 font-size-60 line-height-140 mt-2 mb-0">Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                                    <div class="radial-container w-100 text-stroke-1 text-color-1 font-size-60 line-height-140" style="text-overflow: ellipsis">
+                                        <div class="shape"></div>
+                                        <div class="shape shape-2"></div>
+                                        Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, eget orci, Lorem ipsum dolor sit amet, eget orci, tinci dunt place rat in sociis. Pel lentes que ultri cies.
+                                    </div>
                                 </div>
                             </div>
                         </div>

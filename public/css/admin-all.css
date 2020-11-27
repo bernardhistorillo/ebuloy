@@ -1,1 +1,57 @@
-.table{text-align:center}.table td,.table th{vertical-align:middle}#campaign-cards-container .card{height:100%}.donation-action-buttons-container .dropdown-toggle{width:153px}.text-black{color:#23282c!important}#campaign-deceased-photo{border-radius:50%;width:100%;padding-top:100%;background-position:center;background-repeat:no-repeat;background-size:cover}#campaign-cover-photo{width:100%;height:160px;background-position:center;background-repeat:no-repeat;background-size:cover}#user-photo{width:57px;height:57px;background-position:center;background-repeat:no-repeat;background-size:cover}@media (min-width:576px){#campaign-cover-photo{height:160px}}@media (min-width:768px){#campaign-cover-photo{height:250px}}@media (min-width:992px){#campaign-cover-photo{height:250px}}@media (min-width:1200px){#campaign-cover-photo{height:300px}}
+.table {
+    text-align:center;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+#campaign-cards-container .card {
+    height:100%;
+}
+.donation-action-buttons-container .dropdown-toggle {
+    width:153px;
+}
+.text-black {
+    color: #23282c !important;
+}
+#campaign-deceased-photo {
+    border-radius:50%;
+    width:100%;
+    padding-top:100%;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#campaign-cover-photo {
+    width:100%;
+    height:160px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+#user-photo {
+    width:57px;
+    height:57px;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+@media (min-width: 576px) {
+    #campaign-cover-photo {
+        height:160px;
+    }
+}
+@media (min-width: 768px) {
+    #campaign-cover-photo {
+        height:250px;
+    }
+}
+@media (min-width: 992px) {
+    #campaign-cover-photo {
+        height:250px;
+    }
+}
+@media (min-width: 1200px) {
+    #campaign-cover-photo {
+        height:300px;
+    }
+}

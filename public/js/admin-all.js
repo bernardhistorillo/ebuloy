@@ -1,1 +1,227 @@
-var confirmation=function(a,t){$("#modal-warning .modal-body").html(a);for(var n=0;n<t.length;n++)$("#modal-warning .proceed").attr(t[n].attribute,t[n].value);$("#modal-warning").modal("show")},processing=function(a){$("#modal-warning .proceed").prop("disabled",!0),$("#modal-warning .proceed").html(a),$("#modal-warning button[data-dismiss='modal']").css("display","none")},fail=function(a){var t="";if(is_json_string(a)){a=JSON.parse(a);var n=[];if(n.push(Object.keys(a)),"message"==n[0][0]&&"The given data was invalid."==a[n[0][0]]){t+="<p>"+a[n[0][0]]+"</p>",n.push(Object.keys(a[n[0][1]])),t+="<ul>";for(var o=0;o<n[1].length;o++)for(var e=0;e<a[n[0][1]][n[1][o]].length;e++)t+="<li>"+a[n[0][1]][n[1][o]][e]+"</li>";t+="</ul>"}else t="Unable to connect to the server."}else t=a;""===t&&(t="Unable to connect to the server."),$("#modal-error .modal-body").html(t),$("#modal-error").modal("show")},always=function(){$("#modal-warning").modal("hide"),$("#modal-warning button[data-dismiss='modal']").css("display","block"),$("#modal-warning .proceed").html("Confirm"),$("#modal-warning .proceed").prop("disabled",!1)},success=function(a,t){$("#modal-success .modal-body").html(a),$("#modal-success").modal("show"),""!=t&&($("#modal-success .proceed").prop("disabled",!0),$("#modal-success .proceed").html("Redirecting..."),setTimeout(function(){window.location=t},3e3))},is_json_string=function(a){try{JSON.parse(a)}catch(a){return!1}return!0},numberFormat=function(a,t){var n=(a=parseFloat(a)).toFixed(2).toString().split(".");return n[0]=n[0].replace(/\B(?=(\d{3})+(?!\d))/g,","),t?n.join("."):n[0]};$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="_token"]').attr("content")}}),$(document).ready(function(){var a=$("#route-current").html();["admin.campaigns","admin.view-campaign","admin.accounts","admin.donations"].includes(a)&&($(".data-table").DataTable({aaSorting:[]}),$(".table-responsive .loading").addClass("d-none"),$(".data-table").removeClass("d-none"))}),$(document).on("submit","#signin-form",function(a){a.preventDefault(),$("#signin-button").prop("disabled",!0),$("#signin-button").html("Logging In");var t=new FormData($("#signin-form")[0]);$.ajax({url:$("#route-submit-login").html(),method:"POST",timeout:3e4,cache:!1,contentType:!1,processData:!1,data:t}).done(function(a){""==a.error?window.location=a.redirect:(fail(a.error),$("#signin-button").html("Login"),$("#signin-button").prop("disabled",!1))}).fail(function(a){fail(a.responseText),$("#signin-button").html("Login"),$("#signin-button").prop("disabled",!1)})}),$(document).on("click",".donation-change-status-confirm",function(){let a=$(this).data("name"),t=$(this).data("status"),n=$(this).val();confirmation("Are you sure you want to set the status of "+a+"'s donation as "+['"for verification"',"invalid","verified"][t]+"?",[{attribute:"id",value:"donation-change-status"},{attribute:"data-status",value:t},{attribute:"value",value:n}])}),$(document).on("click","#donation-change-status",function(){processing("Processing...");let a=$(this).val(),t=new FormData;t.append("id",a),t.append("status",$(this).attr("data-status")),$.ajax({url:$("#route-donation-update-status").html(),method:"POST",timeout:3e4,cache:!1,contentType:!1,processData:!1,data:t}).done(function(t){""==t.error?($(".donation-action-buttons-container[data-donation-id='"+a+"']").html(t.content),$("#total-donations").html(t.total_donations),$("#total-tip").html(t.total_tip),success("Donation status has been successfully updated.","")):fail(t.error)}).fail(function(a){fail(a.responseText)}).always(always)}),$(document).on("submit","#change-password-form",function(a){a.preventDefault(),confirmation("Are you sure you want to save changes?",[{attribute:"id",value:"change-password"}])}),$(document).on("click","#change-password",function(){processing("Processing...");let a=new FormData($("#change-password-form")[0]);$.ajax({url:$("#route-admin-change-password").html(),method:"POST",timeout:3e4,cache:!1,contentType:!1,processData:!1,data:a}).done(function(a){""==a.error?($("#change-password-form input").val(""),success("Saving changes successful.","")):fail(a.error)}).fail(function(a){fail(a.responseText)}).always(always)});
+var confirmation = function(message, data) {
+    $("#modal-warning .modal-body").html(message);
+
+    for(var i = 0; i < data.length; i++) {
+        $("#modal-warning .proceed").attr(data[i].attribute, data[i].value);
+    }
+
+    $("#modal-warning").modal("show");
+};
+
+var processing = function(action) {
+    $("#modal-warning .proceed").prop("disabled",true);
+    $("#modal-warning .proceed").html(action);
+    $("#modal-warning button[data-dismiss='modal']").css("display","none");
+};
+
+var fail = function(message) {
+    var content = '';
+
+    if(is_json_string(message)) {
+        message = JSON.parse(message);
+        var properties = [];
+        properties.push(Object.keys(message));
+
+        if(properties[0][0] == "message" && message[properties[0][0]] == "The given data was invalid.") {
+            content += '<p>' + message[properties[0][0]] + '</p>';
+
+            properties.push(Object.keys(message[properties[0][1]]));
+
+            content += '<ul>';
+            for(var i = 0; i < properties[1].length; i++) {
+                for(var j = 0; j < message[properties[0][1]][properties[1][i]].length; j++) {
+                    content += '<li>' + message[properties[0][1]][properties[1][i]][j] + '</li>';
+                }
+            }
+            content += '</ul>';
+        } else {
+            content = "Unable to connect to the server.";
+        }
+    } else {
+        content = message;
+    }
+
+    if(content === '') {
+        content = "Unable to connect to the server.";
+    }
+
+    $('#modal-error .modal-body').html(content);
+    $('#modal-error').modal('show');
+};
+
+var always = function() {
+    $('#modal-warning').modal('hide');
+    $("#modal-warning button[data-dismiss='modal']").css("display","block");
+    $("#modal-warning .proceed").html("Confirm");
+    $("#modal-warning .proceed").prop("disabled",false);
+};
+
+var success = function(message, redirect) {
+    $("#modal-success .modal-body").html(message);
+    $("#modal-success").modal("show");
+
+    if(redirect != "") {
+        $("#modal-success .proceed").prop("disabled", true);
+        $("#modal-success .proceed").html("Redirecting...");
+
+        setTimeout(function() {
+            window.location = redirect;
+        },3000);
+    }
+};
+
+var is_json_string = function(string) {
+    try {
+        JSON.parse(string);
+    } catch (e) {
+        return false;
+    }
+    return true;
+};
+
+var numberFormat = function(x, decimal) {
+    x = parseFloat(x);
+    var parts = x.toFixed(2).toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if(decimal) {
+        return parts.join(".");
+    } else {
+        return parts[0];
+    }
+};
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    }
+});
+
+$(document).ready(function() {
+    var current_route = $("#route-current").html();
+
+    if(['admin.campaigns', 'admin.view-campaign', 'admin.accounts', 'admin.donations'].includes(current_route)) {
+        $(".data-table").DataTable({
+            aaSorting: []
+        });
+        $(".table-responsive .loading").addClass("d-none");
+        $(".data-table").removeClass("d-none");
+    }
+});
+
+$(document).on("submit", "#signin-form", function(e) {
+    e.preventDefault();
+
+    $("#signin-button").prop("disabled", true);
+    $("#signin-button").html("Logging In");
+
+    var formData = new FormData($("#signin-form")[0]);
+
+    $.ajax({
+        url: $("#route-submit-login").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            window.location = response.redirect;
+        } else {
+            fail(response.error);
+
+            $("#signin-button").html("Login");
+            $("#signin-button").prop("disabled", false);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+
+        $("#signin-button").html("Login");
+        $("#signin-button").prop("disabled", false);
+    });
+});
+
+$(document).on("click", ".donation-change-status-confirm", function() {
+    let name = $(this).data("name");
+    let status = $(this).data("status");
+    let donation_id = $(this).val();
+    let status_names = ['"for verification"', "invalid", "verified"];
+
+    confirmation("Are you sure you want to set the status of " + name + "'s donation as " + status_names[status] + "?", [{
+        attribute: "id",
+        value: "donation-change-status"
+    }, {
+        attribute: "data-status",
+        value: status
+    }, {
+        attribute: "value",
+        value: donation_id
+    }]);
+});
+
+$(document).on("click", "#donation-change-status", function() {
+    processing("Processing...");
+
+    let id = $(this).val();
+
+    let formData = new FormData();
+    formData.append('id', id);
+    formData.append('status', $(this).attr("data-status"));
+
+    $.ajax({
+        url: $("#route-donation-update-status").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $(".donation-action-buttons-container[data-donation-id='" + id + "']").html(response.content);
+            $("#total-donations").html(response.total_donations);
+            $("#total-tip").html(response.total_tip);
+
+            success("Donation status has been successfully updated.", "");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});
+
+$(document).on("submit", "#change-password-form", function(e) {
+    e.preventDefault();
+
+    confirmation("Are you sure you want to save changes?", [{
+        attribute: "id",
+        value: "change-password"
+    }]);
+});
+
+$(document).on("click", "#change-password", function() {
+    processing("Processing...");
+
+    let formData = new FormData($("#change-password-form")[0]);
+
+    $.ajax({
+        url: $("#route-admin-change-password").html(),
+        method: "POST",
+        timeout: 30000,
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: formData
+    }).done(function(response) {
+        if(response.error == "") {
+            $("#change-password-form input").val("");
+
+            success("Saving changes successful.", "");
+        } else {
+            fail(response.error);
+        }
+    }).fail(function(e) {
+        fail(e.responseText);
+    }).always(always);
+});

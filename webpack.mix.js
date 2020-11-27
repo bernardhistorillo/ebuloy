@@ -16,6 +16,7 @@ mix.styles([
 ], 'public/css/admin-all.css')
 .styles([
     'resources/css/sidebar/style.css',
+    'resources/css/radial-gradient.css',
     'resources/css/style.css',
 ], 'public/css/all.css')
 .scripts([
